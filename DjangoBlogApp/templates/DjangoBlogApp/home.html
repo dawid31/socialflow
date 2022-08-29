@@ -1,0 +1,40 @@
+{% include 'DjangoBlogApp/main.html' %}
+<head>
+
+    <style>
+        .posts_container
+        {
+            
+            display: grid;
+            place-items: center;
+            margin-bottom: 20px;
+        }
+        .post_container
+        {   
+            width: 50%;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            background: #ffffff;
+        }
+    </style>
+</head>
+
+{% block content %}
+<body>
+    <div class="posts_container">
+        <h1 class="text-success text-center">
+            Activity Feed
+        </h1>
+
+        {% for post in posts %}
+        <div class="post_container">
+            <h1>{{post.name}}</h1>
+            <p>Posted by {{post.user}} {{post.published|timesince}} ago</p>
+            <p>{{post.content}}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+    
