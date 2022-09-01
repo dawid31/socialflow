@@ -2,4 +2,16 @@
 
 {% block content %}
 
+<div class="row my-3 p-3">
+    <div class="content-section">
+        <div class="media">
+          <img src="{{user.profile.avatar.url}}" class="rounded-circle" style="width: 150px;"/>          <div class="media-body">
+            <h2 class="account-heading">{{user.username}}</h2>
+            <p class="text-secondary">{{user.email}}</p>
+          </div>
+        </div>
+        <!-- FORM HERE -->
+      </div>
+</div>
+
 {% endblock content %}

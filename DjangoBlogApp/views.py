@@ -1,3 +1,4 @@
+from time import process_time_ns
 from django.shortcuts import render, redirect
 
 from .forms import PostForm, CustomUserCreationForm
@@ -18,7 +19,7 @@ def create_post(request):
         name = request.POST.get('post_name')
         content = request.POST.get('post_content')
         Post.objects.create(
-            user = request.user,
+            host = request.user,
             name = name,
             content = content,
         )
@@ -26,8 +27,9 @@ def create_post(request):
     return render(request, 'DjangoBlogApp/create_post.html', context)
 
 
-def profile(request):
-    context = {}
+def profile(request, pk):
+    user = User.objects.get(id=pk)
+    context = {'user': user}
     return render(request, 'DjangoBlogApp/profile.html', context)
 
 
