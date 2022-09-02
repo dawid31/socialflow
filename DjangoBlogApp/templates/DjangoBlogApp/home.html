@@ -2,39 +2,82 @@
 <head>
 
     <style>
-        .posts_container
+       
+        .home-container
         {
-            
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 2fr 3fr 2fr;
+            column-gap: 30px;
+        }
+        .posts-container
+        {
             display: grid;
             place-items: center;
             margin-bottom: 20px;
         }
-        .post_container
-        {   
-            width: 50%;
-            text-align: center;
+        .post-container
+        {
+            display: grid;
+            grid-template-columns: 1fr 6fr;
+            text-align: left;
             border-radius: 10px;
             margin-top: 5px;
             margin-bottom: 5px;
             background: #ffffff;
+        }
+        .avatar-container
+        {
+            margin-top: 10px;
+            margin-left: 10px;
         }
     </style>
 </head>
 
 {% block content %}
 <body>
-    <div class="posts_container">
+<div class="home-container">
+    <div>
+        <h3>Filter Posts</h3>
+        tu bedzie filtrowanie postow po:
+        <br>
+        <a href="{% url 'home' %}?q={{request.user}}">My posts</a>
+        <br>
+        favourite posts(?)
+        <br>
+        hasztagach (?)
+
+        <hr>
+    </div>
+    <div class="posts-container">
         <h1 class="text-success text-center">
             Activity Feed
         </h1>
 
         {% for post in posts %}
-        <div class="post_container">
-            <h1>{{post.name}}</h1>
-            <p>Posted by <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> {{post.published|timesince}} ago</p>
-            <p>{{post.content}}</p>
+        <div class="post-container">
+        
+            <div class="avatar-container">
+                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+            </div>
+
+            <div class="content-container">
+                <h1>{{post.name}}</h1>
+                <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
+                <p>{{post.content|slice:":200" }}
+                {% if post.content|length > 200 %}
+                <a href="{% url 'post-details'%}">[Read more]</a>
+                {% endif %}
+                </p>
+            </div>
         </div>
         {% endfor %}
     </div>
+    <div>
+        xd
+    </div>
+</div>
 {% endblock content %}
     
+
+

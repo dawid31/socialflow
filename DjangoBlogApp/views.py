@@ -1,15 +1,22 @@
-from time import process_time_ns
 from django.shortcuts import render, redirect
 
-from .forms import PostForm, CustomUserCreationForm
+from .forms import CustomUserCreationForm
 from .models import *
+
+from django.db.models import Q
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def home(request):
-    posts = Post.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+
+    posts = Post.objects.filter(
+        Q(name__icontains=q) |
+        Q(content__icontains=q) |
+        Q(host__username__icontains=q)
+    )
     context = {'posts': posts}
     return render(request, 'DjangoBlogApp/home.html', context)
 
@@ -25,6 +32,10 @@ def create_post(request):
         )
     context = {}
     return render(request, 'DjangoBlogApp/create_post.html', context)
+
+
+def post_details(request):
+    return render(request, 'DjangoBlogApp/post_details.html')
 
 
 def profile(request, pk):

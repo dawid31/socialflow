@@ -5,7 +5,8 @@
 <div class="row my-3 p-3">
     <div class="content-section">
         <div class="media">
-          <img src="{{user.profile.avatar.url}}" class="rounded-circle" style="width: 150px;"/>          <div class="media-body">
+          <div class="media-body">
+            <img src="{{user.profile.avatar.url}}" class="rounded-circle" style="width: 150px; height: 150px;"/>
             <h2 class="account-heading">{{user.username}}</h2>
             <p class="text-secondary">{{user.email}}</p>
           </div>
