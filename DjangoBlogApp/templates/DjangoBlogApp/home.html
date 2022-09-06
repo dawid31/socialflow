@@ -31,6 +31,25 @@
             margin-top: 10px;
             margin-left: 10px;
         }
+        .comments-container
+        {
+            margin-right: 20px;
+        }
+        .comment-container
+        {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            text-align: left;
+            border-radius: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            background: #eeeeee;
+        }
+        .comment-user-container
+        {
+            margin-top: 5px;
+            margin-left: 5px;
+        }
     </style>
 </head>
 
@@ -62,19 +81,40 @@
             </div>
 
             <div class="content-container">
+
                 <h1>{{post.name}}</h1>
                 <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
                 <p>{{post.content|slice:":200" }}
+                    
                 {% if post.content|length > 200 %}
-                <a href="{% url 'post-details'%}">[Read more]</a>
+                    <a href="{% url 'post-details'%}">[Read more]</a>
                 {% endif %}
+
+                <div class="comments-container">
+
+                {% for comment in post.comments.all %}
+                    <div class="comment-container">
+
+                        <div class="comment-user-container">
+                            <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
+                            <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
+                        </div>
+
+                        <div class="comment-content-container">
+                            {{comment.content}}
+                        </div>
+                    </div>
+                {% endfor %}
+                <a href="{% url 'create-comment' %}">Add Comment</a>
+                </div>
                 </p>
             </div>
         </div>
         {% endfor %}
     </div>
+
     <div>
-        xd
+        TRZECI DIV
     </div>
 </div>
 {% endblock content %}

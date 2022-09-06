@@ -17,7 +17,8 @@ def home(request):
         Q(content__icontains=q) |
         Q(host__username__icontains=q)
     )
-    context = {'posts': posts}
+    comments = Comment.objects.all()
+    context = {'posts': posts, 'comments': comments}
     return render(request, 'DjangoBlogApp/home.html', context)
 
 
@@ -36,6 +37,10 @@ def create_post(request):
 
 def post_details(request):
     return render(request, 'DjangoBlogApp/post_details.html')
+
+
+def create_comment(request):
+    return render(request, 'DjangoBlogApp/create-comment.html')
 
 
 def profile(request, pk):

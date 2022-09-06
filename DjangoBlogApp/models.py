@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     name = models.CharField(max_length=48, blank=True, null=True)
-    content = models.CharField(max_length=512)
+    content = models.TextField(max_length=512)
     host = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     published = models.DateTimeField(auto_now_add=True)
     
@@ -25,3 +25,12 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username} profile"
 
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE, blank=True, null=True)
+    content = models.TextField(max_length=128, blank=True, null=True)
+    published = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.author} comment: {self.content}"
