@@ -1,62 +1,10 @@
 {% include 'DjangoBlogApp/main.html' %}
-<head>
-
-    <style>
-       
-        .home-container
-        {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: 2fr 3fr 2fr;
-            column-gap: 30px;
-        }
-        .posts-container
-        {
-            display: grid;
-            place-items: center;
-            margin-bottom: 20px;
-        }
-        .post-container
-        {
-            display: grid;
-            grid-template-columns: 1fr 6fr;
-            text-align: left;
-            border-radius: 10px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            background: #ffffff;
-        }
-        .avatar-container
-        {
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-        .comments-container
-        {
-            margin-right: 20px;
-        }
-        .comment-container
-        {
-            display: grid;
-            grid-template-rows: 1fr 1fr;
-            text-align: left;
-            border-radius: 10px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            background: #eeeeee;
-        }
-        .comment-user-container
-        {
-            margin-top: 5px;
-            margin-left: 5px;
-        }
-    </style>
-</head>
 
 {% block content %}
-<body>
+
 <div class="home-container">
-    <div>
+
+    <div class="left-container">
         <h3>Filter Posts</h3>
         tu bedzie filtrowanie postow po:
         <br>
@@ -68,6 +16,7 @@
 
         <hr>
     </div>
+
     <div class="posts-container">
         <h1 class="text-success text-center">
             Activity Feed
@@ -87,7 +36,7 @@
                 <p>{{post.content|slice:":200" }}
                     
                 {% if post.content|length > 200 %}
-                    <a href="{% url 'post-details'%}">[Read more]</a>
+                    <a href="{% url 'post-details' post.id%}">[Read more]</a>
                 {% endif %}
 
                 <div class="comments-container">
@@ -105,18 +54,25 @@
                         </div>
                     </div>
                 {% endfor %}
-                <a href="{% url 'create-comment' %}">Add Comment</a>
+
+                    <div class="like-comment-save-container">
+                        <a href="{% url 'post-details' post.id%}">See whole discussion</a>
+                    </div>
+                    
                 </div>
                 </p>
             </div>
+
         </div>
         {% endfor %}
     </div>
 
-    <div>
+    <div class="right-container">
         TRZECI DIV
     </div>
+    
 </div>
+
 {% endblock content %}
     
 

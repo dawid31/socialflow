@@ -1,2 +1,56 @@
-tu beda szczegoly posta, mozliwosc edytowania i usuwania go(jesli masz permisje)
-oraz komentowania go i pelna jego tresc
+{% include 'DjangoBlogApp/main.html' %}
+
+{% block content %}
+    <div class="home-container">
+        <div class="left-spacing"></div>
+
+        <div class="post-container">
+            
+            <div class="avatar-container">
+                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+            </div>
+        
+            <div class="content-container">
+        
+                <h1>{{post.name}}</h1>
+                <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
+                <p>{{post.content}}
+                    
+                
+        
+                <div class="comments-container">
+                {% for comment in post.comments.all %}
+                    <div class="comment-container">
+        
+                        <div class="comment-user-container">
+                            <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
+                            <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
+                        </div>
+        
+                        <div class="comment-content-container">{{comment.content}}</div>
+                    </div>
+                    
+                {% endfor %}
+                <div class="add-comment-container">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" name="comment_content"
+                        placeholder="Add your comment here...">
+                        <br>
+                        <button type="submit" class="btn bg-success">Add</button>
+                    </form>
+                </div>
+
+                </div>
+                </p>
+            </div>
+        </div>
+
+        <div class="participants-container">
+            {{comments_amount}} comments
+            {{participants}}
+        </div>
+
+        <div class="right-spacing"> </div>
+    </div>
+{% endblock content %}

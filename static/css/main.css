@@ -1,0 +1,70 @@
+.home-container
+{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+    column-gap: 30px;
+}
+
+.posts-container
+{
+    display: grid;
+    place-items: center;
+    margin-bottom: 20px;
+}
+
+.post-container
+{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    text-align: left;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #ffffff;
+}
+
+.avatar-container
+{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.comments-container
+{
+    margin-right: 20px;
+}
+
+.comment-container
+{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    text-align: left;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #eeeeee;
+}
+
+.comment-user-container
+{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.comment-content-container
+{
+    margin-left: 10px;
+}
+
+.participants-container
+{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    text-align: left;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    background: #ffffff;
+}

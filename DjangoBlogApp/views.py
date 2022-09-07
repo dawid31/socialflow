@@ -11,12 +11,18 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-
     posts = Post.objects.filter(
         Q(name__icontains=q) |
         Q(content__icontains=q) |
         Q(host__username__icontains=q)
     )
+    if request.method == "POST":
+        content = request.POST.get('comment_content')
+        Comment.objects.create(
+            author = request.user,
+            content = content,
+            #post = ????
+            )
     comments = Comment.objects.all()
     context = {'posts': posts, 'comments': comments}
     return render(request, 'DjangoBlogApp/home.html', context)
@@ -35,12 +41,17 @@ def create_post(request):
     return render(request, 'DjangoBlogApp/create_post.html', context)
 
 
-def post_details(request):
-    return render(request, 'DjangoBlogApp/post_details.html')
+def post_details(request, pk):
+    post = Post.objects.get(id=pk)
+    context = {'post': post}
 
-
-def create_comment(request):
-    return render(request, 'DjangoBlogApp/create-comment.html')
+    if request.method == "POST":
+        Comment.objects.create(
+            author = request.user,
+            post = post,
+            content = request.POST.get('comment_content'),
+        )
+    return render(request, 'DjangoBlogApp/post_details.html', context)
 
 
 def profile(request, pk):
