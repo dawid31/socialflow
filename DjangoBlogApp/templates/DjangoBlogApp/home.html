@@ -13,14 +13,11 @@
         favourite posts(?)
         <br>
         hasztagach (?)
-
         <hr>
     </div>
 
     <div class="posts-container">
-        <h1 class="text-success text-center">
-            Activity Feed
-        </h1>
+        <h1 class="text-success text-center">Activity Feed</h1>
 
         {% for post in posts %}
         <div class="post-container">
@@ -30,7 +27,6 @@
             </div>
 
             <div class="content-container">
-
                 <h1>{{post.name}}</h1>
                 <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
                 <p>{{post.content|slice:":200" }}

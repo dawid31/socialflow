@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, AccountForm
 from .models import *
 
 from django.db.models import Q
@@ -56,7 +56,15 @@ def post_details(request, pk):
 
 def profile(request, pk):
     user = User.objects.get(id=pk)
-    context = {'user': user}
+    user_profile = request.user.profile
+    form = AccountForm(instance=user_profile) #fills fields with user profile data
+
+    if request.method == "POST":
+        form = AccountForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+
+    context = {'user': user, 'form': form}
     return render(request, 'DjangoBlogApp/profile.html', context)
 
 

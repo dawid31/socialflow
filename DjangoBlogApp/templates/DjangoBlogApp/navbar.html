@@ -6,8 +6,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        
-        <a class="nav-item nav-link active" href="#">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
         <a class="nav-item nav-link" href="{% url 'create-post' %}">New Post</a>
         <a class="nav-item nav-link" href="{% url 'profile' request.user.id %}">Profile</a>
@@ -21,7 +20,7 @@
         
         <div class="nav-item nav-link">
             <form>
-              <input type="text" name="q" placeholder="Serach Blog..."/>
+              <input type="text" name="q" placeholder="Search Blog..."/>
             </form>
           </div>
         </div>

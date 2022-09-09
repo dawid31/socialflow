@@ -1,4 +1,4 @@
-from .models import Post
+from .models import Post, Profile
 
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
@@ -10,6 +10,13 @@ class PostForm(ModelForm):
         fields = '__all__'
 
 
+class AccountForm(ModelForm):
+    class Meta():
+        model = Profile
+        fields = '__all__'
+        exclude = ['user']
+
+
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
@@ -17,6 +24,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        
         self.fields['username'].widget.attrs.update(
             {'class': 'form-control form-control-lg', 'placeholder': 'Enter username...'})
         self.fields['email'].widget.attrs.update(
