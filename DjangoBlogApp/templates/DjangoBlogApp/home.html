@@ -4,26 +4,18 @@
 
 <div class="home-container">
 
-    <div class="left-container">
+    <div class="post-container">
         <h3>Filter Posts</h3>
-        tu bedzie filtrowanie postow po:
-        <br>
         <a href="{% url 'home' %}?q={{request.user}}">My posts</a>
-        <br>
-        favourite posts(?)
-        <br>
-        hasztagach (?)
-        <hr>
     </div>
 
     <div class="posts-container">
-        <h1 class="text-success text-center">Activity Feed</h1>
 
         {% for post in posts %}
         <div class="post-container">
         
             <div class="avatar-container">
-                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;    "/>
             </div>
 
             <div class="content-container">
@@ -63,8 +55,8 @@
         {% endfor %}
     </div>
 
-    <div class="right-container">
-        TRZECI DIV
+    <div class="post-container">
+        Recent activity
     </div>
     
 </div>
