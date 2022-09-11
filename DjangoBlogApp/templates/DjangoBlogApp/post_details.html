@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="home-container">
-        <div class="left-spacing"></div>
+        <div class="sidebar-container"></div>
 
         <div class="post-container">
             
@@ -46,11 +46,9 @@
             </div>
         </div>
 
-        <div class="participants-container">
-            {{comments_amount}} comments
+        <div class="sidebar-container">
+            {{post.comments.count}} comments
             {{participants}}
         </div>
 
-        <div class="right-spacing"> </div>
-    </div>
 {% endblock content %}

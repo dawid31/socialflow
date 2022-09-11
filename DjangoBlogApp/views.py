@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .forms import CustomUserCreationForm, AccountForm
+from .forms import CustomUserCreationForm, AccountForm, PostForm
 from .models import *
 
 from django.db.models import Q
@@ -35,9 +35,9 @@ def create_post(request):
         Post.objects.create(
             host = request.user,
             name = name,
-            content = content,
+        content = content,
         )
-    context = {}
+    context = {'form': form}
     return render(request, 'DjangoBlogApp/create_post.html', context)
 
 

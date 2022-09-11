@@ -4,7 +4,7 @@
 
 <div class="home-container">
 
-    <div class="post-container">
+    <div class="sidebar-container">
         <h3>Filter Posts</h3>
         <a href="{% url 'home' %}?q={{request.user}}">My posts</a>
     </div>
@@ -15,7 +15,7 @@
         <div class="post-container">
         
             <div class="avatar-container">
-                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;    "/>
+                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
             </div>
 
             <div class="content-container">
@@ -25,6 +25,12 @@
                     
                 {% if post.content|length > 200 %}
                     <a href="{% url 'post-details' post.id%}">[Read more]</a>
+                {% endif %}
+
+                {% if post.img %}
+                <div class="image-container">
+                    <img style="max-width: 300px; max-height: 200px;" src="{{post.img.url}}"/>
+                </div>
                 {% endif %}
 
                 <div class="comments-container">
@@ -55,7 +61,7 @@
         {% endfor %}
     </div>
 
-    <div class="post-container">
+    <div class="sidebar-container">
         Recent activity
     </div>
     
