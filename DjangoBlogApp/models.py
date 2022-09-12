@@ -33,5 +33,8 @@ class Comment(models.Model):
     content = models.TextField(max_length=128, blank=True, null=True)
     published = models.DateTimeField(auto_now_add=True)
 
+    class Meta():
+        ordering = ['-published']
+
     def __str__(self):
         return f"{self.author} comment: {self.content}"

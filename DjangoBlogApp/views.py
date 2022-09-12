@@ -4,12 +4,20 @@ from .forms import CustomUserCreationForm, AccountForm, PostForm
 from .models import *
 
 from django.db.models import Q
-
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def home(request):
+    User = get_user_model()
+    users = User.objects.all()
+    users_and_posts = {}
+
+    for user in users:
+        user_posts = Post.objects.filter(host=user).count()
+        users_and_posts[user.username] = user_posts
+    
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     posts = Post.objects.filter(
         Q(name__icontains=q) |
@@ -23,8 +31,18 @@ def home(request):
             content = content,
             #post = ????
             )
+    recent_posts = Post.objects.all().order_by('-published')[:5]
+    recent_comments = Comment.objects.all().order_by('-published')[:5]
     comments = Comment.objects.all()
-    context = {'posts': posts, 'comments': comments}
+
+    context = {
+        'posts': posts,
+        'comments': comments,
+        'recent_posts': recent_posts,
+        'recent_comments': recent_comments,
+        'users_and_posts': users_and_posts,
+    }
+
     return render(request, 'DjangoBlogApp/home.html', context)
 
 
@@ -33,11 +51,11 @@ def create_post(request):
         name = request.POST.get('post_name')
         content = request.POST.get('post_content')
         Post.objects.create(
-            host = request.user,
-            name = name,
+        host = request.user,
+        name = name,
         content = content,
         )
-    context = {'form': form}
+    context = {}
     return render(request, 'DjangoBlogApp/create_post.html', context)
 
 
