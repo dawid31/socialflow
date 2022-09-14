@@ -10,13 +10,11 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def home(request):
-    User = get_user_model()
     users = User.objects.all()
     users_and_posts = {}
-
     for user in users:
         user_posts = Post.objects.filter(host=user).count()
-        users_and_posts[user.username] = user_posts
+        users_and_posts[Post.objects.filter(host=user).first().host] = user_posts
     
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     posts = Post.objects.filter(

@@ -7,66 +7,77 @@
     <div class="sidebar-container">
         <h3>Filter Posts</h3>
         <a href="{% url 'home' %}?q={{request.user}}">My posts</a>
-       {% for user, posts in users_and_posts.items %}
-        {{user.username}} with {{posts}} posts!
-       {% endfor %}
-
     </div>
 
-    <div class="posts-container">
+    <div class="home-middle">
 
-        {% for post in posts %}
-        <div class="post-container">
-        
-            <div class="avatar-container">
-                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+        <div class="above-posts-container">
+            <div class="above-posts-container-left">
+                <h3>{{posts.count}} post{{posts.count|pluralize}} matching searching criteria</h3>
             </div>
 
-            <div class="content-container">
-                <h1>{{post.name}}</h1>
-                <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
-                <p>{{post.content|slice:":200" }}
-                    
-                {% if post.content|length > 200 %}
-                    <a href="{% url 'post-details' post.id%}">[Read more]</a>
-                {% endif %}
-
-                {% if post.img %}
-                <div class="image-container">
-                    <img style="max-width: 300px; max-height: 200px;" src="{{post.img.url}}"/>
-                </div>
-                {% endif %}
-
-                <div class="comments-container">
-
-                {% for comment in post.comments.all %}
-                    <div class="comment-container">
-
-                        <div class="comment-user-container">
-                            <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
-                            <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
-                        </div>
-
-                        <div class="comment-content-container">
-                            {{comment.content}}
-                        </div>
-                    </div>
-                {% endfor %}
-
-                    <div class="like-comment-save-container">
-                        <a href="{% url 'post-details' post.id%}">See whole discussion</a>
-                    </div>
-                    
-                </div>
-                </p>
+            <div class="above-posts-container-right">
+                <h3><a href="{% url 'create-post' %}">Create Post</a></h3>
             </div>
 
         </div>
-        {% endfor %}
+
+        <div class="posts-container">
+
+            {% for post in posts %}
+            <div class="post-container">
+            
+                <div class="avatar-container">
+                    <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                </div>
+
+                <div class="content-container">
+                    <h1>{{post.name}}</h1>
+                    <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
+                    <p>{{post.content|slice:":200" }}
+                        
+                    {% if post.content|length > 200 %}
+                        <a href="{% url 'post-details' post.id%}">[Read more]</a>
+                    {% endif %}
+
+                    {% if post.img %}
+                    <div class="image-container">
+                        <img style="max-width: 300px; max-height: 200px;" src="{{post.img.url}}"/>
+                    </div>
+                    {% endif %}
+
+                    <div class="comments-container">
+
+                    {% for comment in post.comments.all %}
+                        <div class="comment-container">
+
+                            <div class="comment-user-container">
+                                <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
+                                <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
+                            </div>
+
+                            <div class="comment-content-container">
+                                {{comment.content}}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                        <div class="like-comment-save-container">
+                            <a href="{% url 'post-details' post.id%}">See whole discussion</a>
+                        </div>
+                        
+                    </div>
+                    </p>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
     </div>
 
-    <div class="sidebar-container">
-    
+    <div class="right-sidebar">
+
         <div class="sidebar-most-and-recent-container">
 
             <div class="sidebar-label">
@@ -74,11 +85,12 @@
             </div>
     
             <div class="sidebar-content">
-                asdasdadasdasdad
+                {% for user, posts in users_and_posts.items %}
+                    {{user.username}}: {{posts}} posts
+                {% endfor %}
             </div> 
 
         </div>
-
 
         <div class="sidebar-most-and-recent-container">
             <div class="sidebar-label">
@@ -95,11 +107,9 @@
             </div>
         
         </div>
-            
-    </div>
     
+    </div>
 </div>
-
 {% endblock content %}
     
 
