@@ -48,10 +48,12 @@ def create_post(request):
     if request.method == "POST":
         name = request.POST.get('post_name')
         content = request.POST.get('post_content')
+        img = request.POST.get('post_image')
         Post.objects.create(
         host = request.user,
         name = name,
         content = content,
+        img = img
         )
     context = {}
     return render(request, 'DjangoBlogApp/create_post.html', context)
