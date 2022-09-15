@@ -1,0 +1,9 @@
+{% include 'DjangoBlogApp/main.html' %}
+
+{% block content %}
+    <p>Are you sure you want to delete post about {{post.name}}?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="yes"/>
+    </form>
+{% endblock content %}

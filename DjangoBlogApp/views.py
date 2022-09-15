@@ -72,6 +72,24 @@ def post_details(request, pk):
     return render(request, 'DjangoBlogApp/post_details.html', context)
 
 
+def edit_post(request, pk):
+    post = Post.objects.get(id=pk)
+    context = {'post': post}
+
+    if request.method == "POST":
+        pass
+    return render(request, 'DjangoBlogApp/edit_post.html', context)
+
+
+def delete_post(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.method == "POST":
+        post.delete()
+        return redirect('home')
+    context = {'post': post}
+    return render(request, 'DjangoBlogApp/delete_post.html', context)
+
+
 def profile(request, pk):
     user = User.objects.get(id=pk)
     user_profile = request.user.profile

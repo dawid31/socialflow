@@ -17,7 +17,10 @@
             </div>
 
             <div class="above-posts-container-right">
+                {% if user.is_authenticated %}
                 <h3><a href="{% url 'create-post' %}">Create Post</a></h3>
+                {% endif %}
+
             </div>
 
         </div>
@@ -34,8 +37,7 @@
                 <div class="content-container">
                     <h1>{{post.name}}</h1>
                     <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
-                    <p>{{post.content|slice:":200" }}
-                        
+                    {{post.content|slice:":200"|linebreaks}}
                     {% if post.content|length > 200 %}
                         <a href="{% url 'post-details' post.id%}">[Read more]</a>
                     {% endif %}
@@ -57,7 +59,7 @@
                             </div>
 
                             <div class="comment-content-container">
-                                {{comment.content}}
+                                {{comment.content|linebreaks}}
                             </div>
                         </div>
                     {% endfor %}
@@ -67,7 +69,14 @@
                         </div>
                         
                     </div>
-                    </p>
+                </div>
+
+                <div class="like-edit-delete-container">
+                    <a>like</a>
+                    {% if request.user == post.host %}
+                    <a href="{% url 'edit-post' post.id %}">edit</a>
+                    <a href="{% url 'delete-post' post.id %}">delete</a>
+                    {% endif %}
                 </div>
 
             </div>
