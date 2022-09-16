@@ -13,8 +13,9 @@ def home(request):
     users = User.objects.all()
     users_and_posts = {}
     for user in users:
-        user_posts = Post.objects.filter(host=user).count()
-        users_and_posts[Post.objects.filter(host=user).first().host] = user_posts
+        if Post.objects.filter(host=user):
+            user_posts = Post.objects.filter(host=user).count()
+            users_and_posts[Post.objects.filter(host=user).first().host] = user_posts
     
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     posts = Post.objects.filter(
@@ -48,12 +49,12 @@ def create_post(request):
     if request.method == "POST":
         name = request.POST.get('post_name')
         content = request.POST.get('post_content')
-        img = request.POST.get('post_image')
+        img = request.FILES.get('post_image')
         Post.objects.create(
         host = request.user,
         name = name,
         content = content,
-        img = img
+        img = img,
         )
     context = {}
     return render(request, 'DjangoBlogApp/create_post.html', context)

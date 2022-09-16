@@ -13,12 +13,16 @@
 
         <div class="above-posts-container">
             <div class="above-posts-container-left">
-                <h3>{{posts.count}} post{{posts.count|pluralize}} matching searching criteria</h3>
+                <smaller>
+                    Activity Feed
+                    <br>
+                    {{posts.count}} post{{posts.count|pluralize}} matching searching criteria
+                </smaller>
             </div>
 
             <div class="above-posts-container-right">
                 {% if user.is_authenticated %}
-                <h3><a href="{% url 'create-post' %}">Create Post</a></h3>
+                <h3><a href="{% url 'create-post' %}">+ Create Post</a></h3>
                 {% endif %}
 
             </div>
@@ -44,7 +48,7 @@
 
                     {% if post.img %}
                     <div class="multimedia-container">
-                        <img style="max-width: 300px; max-height: 200px;" src="{{post.img.url}}"/>
+                        <img style="max-width: 400px; max-height: 266px;" src="{{post.img.url}}"/>
                     </div>
                     {% endif %}
 
@@ -109,8 +113,13 @@
             <div class="sidebar-content">
                 {% for post in recent_posts %}
                     <div class="sidebar-content-element">
-                        <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
-                        <a href="{% url 'post-details' post.id %}">{{post.name}}</a>
+                        <div class="sidebar-content-element-host-info">
+                            <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>
+                        </div>
+                        {{post.published|timesince}} ago
+                        <div class="sidebar-content-element-post-name">
+                            <a href="{% url 'post-details' post.id %}">{{post.name}}</a>
+                        </div>                       
                     </div>
                 {% endfor %}
             </div>

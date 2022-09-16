@@ -23,11 +23,11 @@
 
 <body>
     <h1 class="text-success text-center">
-        DjagnoBlog
+        DjangoBlog
     </h1>
     <h2 class="text-center">Add new post</h2>
     <div class="container">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
             <div class="form-group">
                 <label>Post name:</label>
@@ -43,9 +43,9 @@
 
             <div class="mb-3">
                 <label for="formFile" class="form-label">Image (optional):</label>
-                <input class="form-control" type="file" name="post_image" id="formFile">
+                <input class="form-control" type="file" name="post_image">
             </div>
-  
+
             <button type="submit" class="btn bg-success">Add Post :)</button>
         </form>
     </div>

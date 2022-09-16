@@ -115,6 +115,7 @@
 
 .sidebar-container
 {
+    letter-spacing: 1px;
     display: grid;
     row-gap: 200px;
     text-align: left;
@@ -132,11 +133,29 @@
     padding-right: 10px;
     padding-bottom: 20px;
 }
+
 .sidebar-content-element
 {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    background: #2D383A;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: x-small
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
 }
+
+.sidebar-content-element-post-name
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px;
+    background: #252B30;
+    border-radius: 3px;
+}
+
 .sidebar-label
 {
     text-align: center;
@@ -149,6 +168,7 @@
 }
 .right-sidebar
 {
+    letter-spacing: 1px;
     display: row;
     row-gap: 20px;
 }
@@ -166,6 +186,8 @@
 
 .top-navbar
 {
+    text-align: center;
+    letter-spacing: 1px;
     padding-left: 150px;
     padding-right: 150px;
     background: #333;
@@ -193,13 +215,31 @@
 
 .above-posts-container
 {
- display: flex;
+    letter-spacing: 1px;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .above-posts-container-right
 {
     margin-left: auto;
+    background: #51777d;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
+
+
+
+.above-posts-container-right a
+{
+    color: #f2f2f2;
+}
+
+
 
 .top-navbar a.on-right
 {

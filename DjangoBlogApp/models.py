@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     name = models.CharField(max_length=48, blank=True, null=True)
     content = models.TextField(max_length=512)
-    img = models.ImageField(null=True, blank=True)
+    img = models.ImageField(null=True, blank=True, upload_to = "images/")
     host = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     published = models.DateTimeField(auto_now_add=True)
     
@@ -34,7 +34,7 @@ class Comment(models.Model):
     published = models.DateTimeField(auto_now_add=True)
 
     class Meta():
-        ordering = ['-published']
+        ordering = ['published']
 
     def __str__(self):
         return f"{self.author} comment: {self.content}"
