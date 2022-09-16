@@ -23,7 +23,7 @@
     margin-right: 150px;
     margin-top: 5px;
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 2fr 9fr 3fr;
     column-gap: 40px;
 }
 
@@ -136,13 +136,29 @@
 
 .sidebar-content-element
 {
-    background: #2D383A;
+    border: solid;
+    border-color: #3c4a55;
     border-radius: 10px;
     padding: 5px;
-    font-size: x-small
     margin-top: 10px;
     margin-bottom: 10px;
     
+}
+
+.sidebar-content-element-post-date
+{
+    font-size: small;
+}
+.sidebar-content-element-user-avatar
+{
+    margin-top: 4px;
+    text-align: center;
+}
+
+.sidebar-content-element-post-info
+{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
 }
 
 .sidebar-content-element-post-name
@@ -232,14 +248,10 @@
     padding-bottom: 5px;
 }
 
-
-
 .above-posts-container-right a
 {
     color: #f2f2f2;
 }
-
-
 
 .top-navbar a.on-right
 {

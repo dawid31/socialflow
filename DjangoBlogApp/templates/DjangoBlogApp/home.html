@@ -99,7 +99,7 @@
     
             <div class="sidebar-content">
                 {% for user, posts in users_and_posts.items %}
-                    {{user.username}}: {{posts}} posts
+                    <p>{{user.username}}: {{posts}} posts</p>
                 {% endfor %}
             </div> 
 
@@ -113,10 +113,29 @@
             <div class="sidebar-content">
                 {% for post in recent_posts %}
                     <div class="sidebar-content-element">
-                        <div class="sidebar-content-element-host-info">
-                            <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>
+
+                        <div class="sidebar-content-element-post-info">
+
+                            <div class="sidebar-content-element-user-avatar">
+                                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 40px; height: 40px; border: solid; border-color: green;"/>
+                            </div>
+
+                            <div class="sidebar-content-element-rest">
+
+                                <div class="sidebar-content-element-host-info">
+                                    <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>
+                                </div>
+        
+                                <div class="sidebar-content-element-post-date">
+                                    {{post.published|timesince}} ago
+                                </div>
+                                
+                            </div>
+
+                            
+                            
                         </div>
-                        {{post.published|timesince}} ago
+        
                         <div class="sidebar-content-element-post-name">
                             <a href="{% url 'post-details' post.id %}">{{post.name}}</a>
                         </div>                       
