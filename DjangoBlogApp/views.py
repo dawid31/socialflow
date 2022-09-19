@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import CustomUserCreationForm, AccountForm, PostForm
 from .models import *
@@ -63,13 +63,19 @@ def create_post(request):
 def post_details(request, pk):
     post = Post.objects.get(id=pk)
     context = {'post': post}
-
     if request.method == "POST":
-        Comment.objects.create(
-            author = request.user,
-            post = post,
-            content = request.POST.get('comment_content'),
-        )
+
+        if "comment_content" in request.POST:
+            Comment.objects.create(
+                author = request.user,
+                post = post,
+                content = request.POST.get('comment_content'),
+            )
+
+        if "like" in request.POST:
+            post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
+            post_to_like.likes.add(request.user)
+
     return render(request, 'DjangoBlogApp/post_details.html', context)
 
 

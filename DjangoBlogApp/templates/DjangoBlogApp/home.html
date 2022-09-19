@@ -69,7 +69,11 @@
                     {% endfor %}
 
                         <div class="like-comment-save-container">
-                            <a href="{% url 'post-details' post.id%}">See whole discussion</a>
+                            <a class="on-left" href="{% url 'post-details' post.id%}">See whole discussion</a>
+                            <a class="on-right">?</a>
+                            <a class="on-right">Comment</a>
+                            <a class="on-right">Like</a>
+
                         </div>
                         
                     </div>
