@@ -24,12 +24,18 @@ def home(request):
         Q(host__username__icontains=q)
     )
     if request.method == "POST":
-        content = request.POST.get('comment_content')
-        Comment.objects.create(
-            author = request.user,
-            content = content,
-            #post = ????
-            )
+        # if x:
+        #     content = request.POST.get('comment_content')
+        #     Comment.objects.create(
+        #         author = request.user,
+        #         content = content,
+        #         #post = ????
+        #         )
+
+        if "like" in request.POST:
+            post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
+            post_to_like.likes.add(request.user)
+            
     recent_posts = Post.objects.all().order_by('-published')[:5]
     recent_comments = Comment.objects.all().order_by('-published')[:5]
     comments = Comment.objects.all()

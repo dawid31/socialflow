@@ -70,9 +70,20 @@
 
                         <div class="like-comment-save-container">
                             <a class="on-left" href="{% url 'post-details' post.id%}">See whole discussion</a>
-                            <a class="on-right">?</a>
-                            <a class="on-right">Comment</a>
-                            <a class="on-right">Like</a>
+
+                          
+
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="like" value="like">
+                                    <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                        <img src="images/like_icon.png" style="width: 25px; height: 25px;"/>
+                                    </button>
+                            </form>
+                     
+                            <a class="on-right">
+                                comment
+                            </a>
 
                         </div>
                         
