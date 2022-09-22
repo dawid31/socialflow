@@ -68,7 +68,6 @@ def create_post(request):
 
 def post_details(request, pk):
     post = Post.objects.get(id=pk)
-    context = {'post': post}
     if request.method == "POST":
 
         if "comment_content" in request.POST:
@@ -81,26 +80,54 @@ def post_details(request, pk):
         if "like" in request.POST:
             post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
             post_to_like.likes.add(request.user)
-
+            
+    context = {'post': post}
     return render(request, 'DjangoBlogApp/post_details.html', context)
 
 
 def edit_post(request, pk):
     post = Post.objects.get(id=pk)
-    context = {'post': post}
 
     if request.method == "POST":
         pass
+    
+    context = {'post': post}
     return render(request, 'DjangoBlogApp/edit_post.html', context)
 
 
 def delete_post(request, pk):
     post = Post.objects.get(id=pk)
+
     if request.method == "POST":
         post.delete()
         return redirect('home')
+
     context = {'post': post}
     return render(request, 'DjangoBlogApp/delete_post.html', context)
+
+
+def edit_comment(request, pk):
+    comment = Comment.objects.get(id=pk)
+
+    if request.method == "POST":
+        content = request.POST.get('comment_content')
+        comment.content = content
+        comment.save()
+        return redirect('home')
+
+    context = {'comment': comment}
+    return render(request, 'DjangoBlogApp/edit_comment.html', context)
+
+
+def delete_comment(request, pk):
+    comment = Comment.objects.get(id=pk)
+
+    if request.method == "POST":
+        comment.delete()
+        return redirect('home')
+
+    context = {'comment': comment}
+    return render(request, 'DjangoBlogApp/delete_comment.html', context)
 
 
 def profile(request, pk):

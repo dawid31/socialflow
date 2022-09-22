@@ -65,6 +65,10 @@
                             <div class="comment-content-container">
                                 {{comment.content|linebreaks}}
                             </div>
+                            {% if request.user == comment.author %}
+                            <a href="{% url 'edit-comment' comment.id %}">edit</a>
+                            <a href="{% url 'delete-comment' comment.id %}">delete</a>
+                            {% endif %}
                         </div>
                     {% endfor %}
 
@@ -81,9 +85,13 @@
                                     </button>
                             </form>
                      
-                            <a class="on-right">
-                                comment
-                            </a>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment" value="comment">
+                                    <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                        <img src="images/comment_icon.png" style="width: 25px; height: 25px;"/>
+                                    </button>
+                            </form>
 
                         </div>
                         
