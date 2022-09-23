@@ -53,7 +53,6 @@
                     {% endif %}
 
                     <div class="comments-container">
-
                     {% for comment in post.comments.all %}
                         <div class="comment-container">
 
@@ -92,6 +91,14 @@
                                         <img src="images/comment_icon.png" style="width: 25px; height: 25px;"/>
                                     </button>
                             </form>
+
+                            {% if post.likes.count == 0 %}
+                            <p>No one liked this post yet</p>
+                            {% elif post.likes.count == 1 %}
+                            <p>{{post.likes.count}} like</p>
+                            {% else %}
+                            <p>{{post.likes.count}} likes</p>
+                            {% endif %}
 
                         </div>
                         
