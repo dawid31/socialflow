@@ -23,6 +23,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     biogram = models.TextField(max_length=512)
     avatar = models.ImageField(null=True, blank=True, default='default.png')
+    followers = models.ManyToManyField(User, blank=True, related_name="followers")
+    following = models.ManyToManyField(User, blank=True, related_name="following")
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

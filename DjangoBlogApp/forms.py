@@ -15,7 +15,7 @@ class AccountForm(ModelForm):
     class Meta():
         model = Profile
         fields = '__all__'
-        exclude = ['user']
+        exclude = ['user', 'followers', 'following']
 
 
 class CustomUserCreationForm(UserCreationForm):

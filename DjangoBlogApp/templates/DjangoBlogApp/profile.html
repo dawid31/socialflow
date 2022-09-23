@@ -13,6 +13,10 @@
               <br>
               {{user.profile.biogram}}
             </p>
+            {{user.profile.followers.all.count}} followers
+            {{user.profile.following.all.count}} following
+            <!-- create popping up window with followers and following using this
+            https://pypi.org/project/django-bootstrap-modal-forms/ -->
           </div>
         </div>
 
@@ -22,12 +26,18 @@
     
           <form method="POST", action="" enctype="multipart/form-data">
               {% csrf_token %}
+              <input type="hidden" name="account_form">
               {{form.as_p}}
               <button type="submit">Save Settings</button>
           </form>
         </div>
+        {% else %}
+        <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="follow">
+          <button type="submit" class="btn bg-success">Follow</button>
+        </form>
         {% endif %}
-
     </div>
 </div>
 </div>

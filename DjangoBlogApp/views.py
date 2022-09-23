@@ -136,9 +136,14 @@ def profile(request, pk):
     form = AccountForm(instance=user_profile) #fills fields with user profile data
 
     if request.method == "POST":
-        form = AccountForm(request.POST, request.FILES, instance=user_profile)
-        if form.is_valid():
-            form.save()
+        if "account_form" in request.POST:
+            form = AccountForm(request.POST, request.FILES, instance=user_profile)
+            if form.is_valid():
+                form.save()
+        
+        if "follow" in request.POST:
+            user.profile.followers.add(request.user)
+            request.user.profile.following.add(user)
 
     context = {'user': user, 'form': form}
     return render(request, 'DjangoBlogApp/profile.html', context)
