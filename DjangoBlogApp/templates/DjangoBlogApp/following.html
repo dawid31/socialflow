@@ -1,0 +1,11 @@
+{% include 'DjangoBlogApp/main.html' %}
+
+{% block content%}
+
+{% for followed in following %}
+
+<p>{{followed.username}}</p>
+
+{% endfor %}
+
+{% endblock content %}

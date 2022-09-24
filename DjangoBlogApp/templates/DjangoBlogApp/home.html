@@ -20,13 +20,12 @@
                 </smaller>
             </div>
 
+            {% if user.is_authenticated %}
             <div class="above-posts-container-right">
-                {% if user.is_authenticated %}
                 <h3><a href="{% url 'create-post' %}">+ Create Post</a></h3>
-                {% endif %}
-
             </div>
-
+            {% endif %}
+            
         </div>
 
         <div class="posts-container">
@@ -40,7 +39,7 @@
 
                 <div class="content-container">
                     <h1>{{post.name}}</h1>
-                    <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
+                    <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>  {{post.published|timesince}} ago</p>
                     {{post.content|slice:":200"|linebreaks}}
                     {% if post.content|length > 200 %}
                         <a href="{% url 'post-details' post.id%}">[Read more]</a>
@@ -74,21 +73,19 @@
                         <div class="like-comment-save-container">
                             <a class="on-left" href="{% url 'post-details' post.id%}">See whole discussion</a>
 
-                          
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment" value="comment">
+                                    <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                        <img src="images/comment.png" style="width: 25px; height: 25px;"/>
+                                    </button>
+                            </form>
 
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="like" value="like">
                                     <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                        <img src="images/like_icon.png" style="width: 25px; height: 25px;"/>
-                                    </button>
-                            </form>
-                     
-                            <form method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="comment" value="comment">
-                                    <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                        <img src="images/comment_icon.png" style="width: 25px; height: 25px;"/>
+                                        <img src="images/like.png" style="width: 25px; height: 25px;"/>
                                     </button>
                             </form>
 

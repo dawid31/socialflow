@@ -1,0 +1,22 @@
+{% include 'DjangoBlogApp/main.html' %}
+
+{% block content%}
+<div class="login-register-container">
+
+    {% for follower in followers %}
+
+    <p>
+        <div class="avatar-container">
+            <img src="{{follower.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+        </div>
+
+        <a href="{% url 'profile' follower.profile.id %}">{{follower.username}}</a>
+
+    </p>
+    
+    {% endfor %}
+
+</div>
+
+
+{% endblock content %}

@@ -149,6 +149,20 @@ def profile(request, pk):
     return render(request, 'DjangoBlogApp/profile.html', context)
 
 
+def followers(request, pk):
+    user = User.objects.get(id=pk)
+    followers = user.profile.followers.all()
+    context = {'followers': followers}
+    return render(request, 'DjangoBlogApp/followers.html', context)
+
+
+def following(request, pk):
+    user = User.objects.get(id=pk)
+    following = user.profile.following.all()
+    context = {'following': following}
+    return render(request, 'DjangoBlogApp/following.html', context)
+
+
 def about(request):
     context = {}
     return render(request, 'DjangoBlogApp/about.html', context)

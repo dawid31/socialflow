@@ -13,10 +13,14 @@
               <br>
               {{user.profile.biogram}}
             </p>
-            {{user.profile.followers.all.count}} followers
-            {{user.profile.following.all.count}} following
-            <!-- create popping up window with followers and following using this
-            https://pypi.org/project/django-bootstrap-modal-forms/ -->
+
+            <p>
+              <a href="{% url 'followers' user.id%}"><b>{{user.profile.followers.all.count}}</b> followers</a>
+              <img src="images/followers.png" style="width: 25px; height: 25px;"/>
+              <a href="{% url 'following' user.id%}"><b>{{user.profile.following.all.count}}</b> following</a>
+            </p>
+
+            
           </div>
         </div>
 
