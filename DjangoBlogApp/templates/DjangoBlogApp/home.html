@@ -55,24 +55,38 @@
                     {% for comment in post.comments.all %}
                         <div class="comment-container">
 
-                            <div class="comment-user-container">
-                                <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
-                                <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
+                            <div class="comment-container-left">
+                                <div class="comment-user-container">
+                                    <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
+                                    <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
+                                </div>
+    
+                                <div class="comment-content-container">
+                                    {{comment.content|linebreaks}}
+                                </div>
                             </div>
 
-                            <div class="comment-content-container">
-                                {{comment.content|linebreaks}}
-                            </div>
                             {% if request.user == comment.author %}
-                            <a href="{% url 'edit-comment' comment.id %}">edit</a>
-                            <a href="{% url 'delete-comment' comment.id %}">delete</a>
+                            <div class="comment-container-right">
+
+                                <a href="{% url 'delete-comment' comment.id %}">
+                                    <img src="images/close.png" style="width: 15px; height: 15px;"/>
+                                </a>
+
+                                <a href="{% url 'edit-comment' comment.id %}">
+                                    <img src="images/edit.png" style="width: 15px; height: 15px;"/>
+                                </a>
+                            </div>
                             {% endif %}
+
+
                         </div>
+
                     {% endfor %}
 
                         <div class="like-comment-save-container">
                             <a class="on-left" href="{% url 'post-details' post.id%}">See whole discussion</a>
-
+                            
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="comment" value="comment">
@@ -102,11 +116,17 @@
                     </div>
                 </div>
 
-                <div class="like-edit-delete-container">
-                    <a>like</a>
+                <div class="edit-delete-container">
                     {% if request.user == post.host %}
-                    <a href="{% url 'edit-post' post.id %}">edit</a>
-                    <a href="{% url 'delete-post' post.id %}">delete</a>
+
+                    <a href="{% url 'delete-post' post.id %}">
+                        <img src="images/close.png" style="width: 25px; height: 25px;"/>
+                    </a>
+
+                    <a href="{% url 'edit-post' post.id %}">
+                        <img src="images/edit.png" style="width: 25px; height: 25px;"/>
+                    </a>
+                    
                     {% endif %}
                 </div>
 
