@@ -39,10 +39,14 @@
 
                 <div class="content-container">
                     <h1>{{post.name}}</h1>
-                    <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>  {{post.published|timesince}} ago</p>
+                    <p>
+                        <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>  {{post.published|timesince}} ago
+                        <a class="on-right" href="{% url 'post-details' post.id%}">See whole discussion</a>
+
+                    </p>
                     {{post.content|slice:":200"|linebreaks}}
                     {% if post.content|length > 200 %}
-                        <a href="{% url 'post-details' post.id%}">[Read more]</a>
+                        <p><a href="{% url 'post-details' post.id%}">[Read more]</a></p>
                     {% endif %}
 
                     {% if post.img %}
@@ -85,31 +89,36 @@
                     {% endfor %}
 
                         <div class="like-comment-save-container">
-                            <a class="on-left" href="{% url 'post-details' post.id%}">See whole discussion</a>
+                            <div class="on-left">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="like" value="like">
+                                        <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                            <img src="images/like.png" style="width: 25px; height: 25px;"/>
+                                        </button>
+                                </form>
+
+                                {% if post.likes.count == 0 %}
+                                    No one liked this post yet
+                                {% elif post.likes.count == 1 %}
+                                    {{post.likes.count}} like
+                                {% else %}
+                                    {{post.likes.count}} likes
+                                {% endif %}
+                            </div>
+
+                            <div class="on-right">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="comment" value="comment">
+                                    <input type="text" class="comment-input" name="comment_content" placeholder="Comment">
+                                        <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                            <img src="images/comment.png" style="width: 25px; height: 25px;"/>
+                                        </button>
+                                </form>
+                            </div>
                             
-                            <form method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="comment" value="comment">
-                                    <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                        <img src="images/comment.png" style="width: 25px; height: 25px;"/>
-                                    </button>
-                            </form>
-
-                            <form method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="like" value="like">
-                                    <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                        <img src="images/like.png" style="width: 25px; height: 25px;"/>
-                                    </button>
-                            </form>
-
-                            {% if post.likes.count == 0 %}
-                            <p>No one liked this post yet</p>
-                            {% elif post.likes.count == 1 %}
-                            <p>{{post.likes.count}} like</p>
-                            {% else %}
-                            <p>{{post.likes.count}} likes</p>
-                            {% endif %}
+                              
 
                         </div>
                         
@@ -154,11 +163,12 @@
 
         <div class="sidebar-most-and-recent-container">
             <div class="sidebar-label">
-                RECENT ACTIVITY
+                FOLLOWING FEED
             </div>
-
             <div class="sidebar-content">
-                {% for post in recent_posts %}
+                {% if user.is_authenticated %}
+                {% if followed_posts %}
+                {% for post in followed_posts %}
                     <div class="sidebar-content-element">
 
                         <div class="sidebar-content-element-post-info">
@@ -171,6 +181,7 @@
 
                                 <div class="sidebar-content-element-host-info">
                                     <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>
+                                    
                                 </div>
         
                                 <div class="sidebar-content-element-post-date">
@@ -188,6 +199,12 @@
                         </div>                       
                     </div>
                 {% endfor %}
+                {% else %}
+                <p>Follow people to see their latest activity here!</p>
+                {% endif %}
+                {% else %}
+                <p>Log in to see activity of people that you follow!</p>
+                {% endif %}
             </div>
         
         </div>

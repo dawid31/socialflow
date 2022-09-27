@@ -23,29 +23,37 @@ def home(request):
         Q(content__icontains=q) |
         Q(host__username__icontains=q)
     )
+    if request.user.is_authenticated:
+        followed_people = request.user.profile.following.all()
+        followed_posts = Post.objects.filter(host__in=followed_people).all()
+    else:
+        followed_posts = None
+
     if request.method == "POST":
-        # if x:
-        #     content = request.POST.get('comment_content')
-        #     Comment.objects.create(
-        #         author = request.user,
-        #         content = content,
-        #         #post = ????
-        #         )
 
         if "like" in request.POST:
             post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
             post_to_like.likes.add(request.user)
+        
+        if "comment" in request.POST:
+            post_to_comment = get_object_or_404(Post, id=request.POST.get('post_id'))
+            content = request.POST.get('comment_content')
+            Comment.objects.create(
+                post = post_to_comment,
+                author = request.user,
+                content = content
+            )
             
-    recent_posts = Post.objects.all().order_by('-published')[:5]
+            
     recent_comments = Comment.objects.all().order_by('-published')[:5]
     comments = Comment.objects.all()
 
     context = {
         'posts': posts,
         'comments': comments,
-        'recent_posts': recent_posts,
         'recent_comments': recent_comments,
         'users_and_posts': users_and_posts,
+        'followed_posts': followed_posts,
     }
 
     return render(request, 'DjangoBlogApp/home.html', context)

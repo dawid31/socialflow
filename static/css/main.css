@@ -105,6 +105,11 @@
 {
     margin-left: 10px;
 }
+.content-container a.on-right
+{
+    float: right;
+}
+
 
 .login-register-container
 {
@@ -284,26 +289,37 @@
 {
     float: right;
 }
-
-.like-comment-save-container a
+.like-comment-save-container
 {
-    margin-right: 60px;
+    
 }
-
 .like-comment-save-container a.on-right
 {
     float: right;
 }
+.on-left
+{
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    float: left;
+}
+.on-right
+{
+    float: right;
+}
+
+.comment-input
+{
+    border-radius: 10px;
+}
 
 .comment-button
 {
-    margin-right: 60px;
-    float: right;
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
     cursor: pointer;
     overflow: hidden;
     outline: none;
-  
 }
