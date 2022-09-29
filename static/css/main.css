@@ -23,7 +23,7 @@
     margin-right: 150px;
     margin-top: 5px;
     display: grid;
-    grid-template-columns: 2fr 9fr 3fr;
+    grid-template-columns: 3fr 9fr 3fr;
     column-gap: 40px;
 }
 
@@ -109,8 +109,6 @@
 {
     float: right;
 }
-
-
 .login-register-container
 {
     text-align: center;
@@ -215,11 +213,17 @@
     display: row;
     row-gap: 20px;
 }
+.left-sidebar
+{
+    letter-spacing: 1px;
+}
+
 
 .sidebar-most-and-recent-container
 {
     margin-bottom: 20px;
     background-color: #252B30;
+    height: fit-content;
 }
 
 .right-navbar
@@ -307,6 +311,7 @@
 .on-right
 {
     float: right;
+    margin-right: 20px;
 }
 
 .comment-input

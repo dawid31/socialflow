@@ -1,16 +1,21 @@
 {% include 'DjangoBlogApp/main.html' %}
 
 {% block content%}
-<div class="login-register-container">
-{% for followed in following %}
-<p>
-    <div class="avatar-container">
-        <img src="{{followed.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+    <div class="login-register-container">
+
+        <h3>Following:</h3>
+
+        {% for followed in following %}
+
+            <div class="sidebar-content-element">
+                <p>
+                    <div class="avatar-container">
+                        <img src="{{followed.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                    </div>
+                    <a href="{% url 'profile' followed.profile.id %}">{{followed.username}}</a>
+                </p>
+            </div>
+        
+        {% endfor %}
     </div>
-
-    <a href="{% url 'profile' followed.profile.id %}">{{followed.username}}</a>
-
-</p>
-{% endfor %}
-</div>
 {% endblock content %}

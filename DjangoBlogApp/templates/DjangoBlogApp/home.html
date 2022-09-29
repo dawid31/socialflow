@@ -3,11 +3,41 @@
 {% block content %}
 
 <div class="home-container">
+    <div class="left-sidebar">
 
-    <div class="sidebar-container">
-        <h3>Filter Posts</h3>
-        <a href="{% url 'home' %}?q={{request.user}}">My posts</a>
+        <div class="sidebar-most-and-recent-container">
+            <div class="sidebar-label">
+                MOST ACTIVE USERS
+            </div>
+
+            <div class="sidebar-content">
+                {% for user, posts in users_and_posts.items %}
+                    <p>{{user.username}}: {{posts}} posts</p>
+                {% endfor %}
+            </div> 
+        </div>
+
+        <div class="sidebar-most-and-recent-container">
+
+            <div class="sidebar-label">
+                Search
+            </div>
+
+            <div class="search-input">
+
+                <div class="form-outline">
+                  <input type="search" id="form1" class="form-control" />
+                  <label class="form-label" for="form1">Search</label>
+                </div>
+
+                <button type="button" class="btn btn-primary">
+                  <i class="fas fa-search"></i>
+                </button>
+
+            </div>
+        </div>
     </div>
+    
 
     <div class="home-middle">
 
@@ -36,7 +66,7 @@
                 <div class="avatar-container">
                     <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
                 </div>
-
+                
                 <div class="content-container">
                     <h1>{{post.name}}</h1>
                     <p>
@@ -147,19 +177,6 @@
 
     <div class="right-sidebar">
 
-        <div class="sidebar-most-and-recent-container">
-
-            <div class="sidebar-label">
-                MOST ACTIVE USERS
-            </div>
-    
-            <div class="sidebar-content">
-                {% for user, posts in users_and_posts.items %}
-                    <p>{{user.username}}: {{posts}} posts</p>
-                {% endfor %}
-            </div> 
-
-        </div>
 
         <div class="sidebar-most-and-recent-container">
             <div class="sidebar-label">
