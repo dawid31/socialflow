@@ -120,21 +120,36 @@
 
                         <div class="like-comment-save-container">
                             <div class="on-left">
+                                {% if request.user in post.likes.all %}
                                 <form method="POST">
                                     {% csrf_token %}
-                                    <input type="hidden" name="like" value="like">
+                                    <input type="hidden" name="unlike" value="unlike">
                                         <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                            <img src="images/like.png" style="width: 25px; height: 25px;"/>
+                                            <img src="images/unlike.png" style="width: 25px; height: 25px;"/>
                                         </button>
                                 </form>
+                                {% else %}
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="like" value="like">
+                                            <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                                <img src="images/like.png" style="width: 25px; height: 25px;"/>
+                                            </button>
+                                    </form>
+                                {% endif %}
 
                                 {% if post.likes.count == 0 %}
                                     No one liked this post yet
                                 {% elif post.likes.count == 1 %}
-                                    {{post.likes.count}} like
+                                    {% if request.user in post.likes.all %}
+                                        1 like (You)
+                                    {% else %}
+                                        {{post.likes.count}} like
+                                    {% endif %}
                                 {% else %}
                                     {{post.likes.count}} likes
                                 {% endif %}
+
                             </div>
 
                             <div class="on-right">

@@ -25,22 +25,30 @@
         </div>
 
         {% if request.user == user %}
-        <div>
-          <h1 class="text-success text-center">Edit Account</h1>
-    
-          <form method="POST", action="" enctype="multipart/form-data">
-              {% csrf_token %}
-              <input type="hidden" name="account_form">
-              {{form.as_p}}
-              <button type="submit">Save Settings</button>
-          </form>
-        </div>
+          <div>
+            <h1 class="text-success text-center">Edit Account</h1>
+      
+            <form method="POST", action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="account_form">
+                {{form.as_p}}
+                <button type="submit">Save Settings</button>
+            </form>
+          </div>
         {% else %}
-        <form method="POST">
-          {% csrf_token %}
-          <input type="hidden" name="follow">
-          <button type="submit" class="btn bg-success">Follow</button>
-        </form>
+          {% if request.user not in user.profile.followers.all %}
+            <form method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="follow">
+              <button type="submit" class="btn bg-success">Follow</button>
+            </form>
+          {% else %}
+            <form method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="unfollow">
+              <button type="submit" class="btn bg-success">Unfollow</button>
+            </form>
+          {% endif %}
         {% endif %}
     </div>
 </div>
