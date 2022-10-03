@@ -1,5 +1,5 @@
 {% include 'DjangoBlogApp/main.html' %}
-
+{% load static %}
 {% block content %}
 <div class="login-register-container">
   <div class="row my-3 p-3">
@@ -16,7 +16,7 @@
 
             <p>
               <a href="{% url 'followers' user.id%}"><b>{{user.profile.followers.all.count}}</b> followers</a>
-              <img src="images/followers.png" style="width: 25px; height: 25px;"/>
+              <img src="{% static 'images/followers.png' %}" style="width: 25px; height: 25px;"/>
               <a href="{% url 'following' user.id%}"><b>{{user.profile.following.all.count}}</b> following</a>
             </p>
 

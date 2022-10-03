@@ -101,7 +101,10 @@ def edit_post(request, pk):
     post = Post.objects.get(id=pk)
 
     if request.method == "POST":
-        pass
+        post.name = request.POST.get('post_name')
+        post.content = request.POST.get('post_content')
+        post.img = request.FILES.get('post_image')
+        post.save()
     
     context = {'post': post}
     return render(request, 'DjangoBlogApp/edit_post.html', context)

@@ -17,25 +17,7 @@
             </div> 
         </div>
 
-        <div class="sidebar-most-and-recent-container">
-
-            <div class="sidebar-label">
-                Search
-            </div>
-
-            <div class="search-input">
-
-                <div class="form-outline">
-                  <input type="search" id="form1" class="form-control" />
-                  <label class="form-label" for="form1">Search</label>
-                </div>
-
-                <button type="button" class="btn btn-primary">
-                  <i class="fas fa-search"></i>
-                </button>
-
-            </div>
-        </div>
+       
     </div>
     
 
@@ -44,10 +26,20 @@
         <div class="above-posts-container">
             <div class="above-posts-container-left">
                 <smaller>
-                    Activity Feed
-                    <br>
                     {{posts.count}} post{{posts.count|pluralize}} matching searching criteria
                 </smaller>
+                <form method="GET" action="{% url 'home' %}">
+                <div class="main-search-input-wrap">
+                        <div class="main-search-input fl-wrap">
+                            <div class="main-search-input-item">
+                                <input type="text"  value="" name="q" placeholder="Search...">
+                            </div>
+                                                            
+                            <button class="main-search-button">Search</button>
+                        </div>
+                </div>
+                </form>
+
             </div>
 
             {% if user.is_authenticated %}

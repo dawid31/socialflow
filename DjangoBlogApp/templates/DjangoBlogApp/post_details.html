@@ -1,5 +1,5 @@
 {% include 'DjangoBlogApp/main.html' %}
-
+{% load static %}
 {% block content %}
     <div class="home-container">
         <div class="sidebar-container"></div>
@@ -9,47 +9,124 @@
             <div class="avatar-container">
                 <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
             </div>
-        
+            
             <div class="content-container">
-        
                 <h1>{{post.name}}</h1>
-                <p><a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago</p>
-                <p>{{post.content}}
-                    
-                
-        
+                <p>
+                    <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>  {{post.published|timesince}} ago
+                    <a class="on-right" href="{% url 'post-details' post.id%}">See whole discussion</a>
+
+                </p>
+                {{post.content|slice:":200"|linebreaks}}
+                {% if post.content|length > 200 %}
+                    <p><a href="{% url 'post-details' post.id%}">[Read more]</a></p>
+                {% endif %}
+
+                {% if post.img %}
+                <div class="multimedia-container">
+                    <img style="max-width: 400px; max-height: 266px;" src="{{post.img.url}}"/>
+                </div>
+                {% endif %}
+
                 <div class="comments-container">
                 {% for comment in post.comments.all %}
                     <div class="comment-container">
-        
-                        <div class="comment-user-container">
-                            <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
-                            <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
+
+                        <div class="comment-container-left">
+                            <div class="comment-user-container">
+                                <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
+                                <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
+                            </div>
+
+                            <div class="comment-content-container">
+                                {{comment.content|linebreaks}}
+                            </div>
                         </div>
-        
-                        <div class="comment-content-container">{{comment.content}}</div>
+
+                        {% if request.user == comment.author %}
+                        <div class="comment-container-right">
+
+                            <a href="{% url 'delete-comment' comment.id %}">
+                                <img src="{% static 'images/close.png' %}" style="width: 15px; height: 15px;"/>
+                            </a>
+
+                            <a href="{% url 'edit-comment' comment.id %}">
+                                <img src="{% static 'images/edit.png' %}" style="width: 15px; height: 15px;"/>
+                            </a>
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+
+                {% endfor %}
+
+                    <div class="like-comment-save-container">
+                        <div class="on-left">
+                            {% if request.user in post.likes.all %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="unlike" value="unlike">
+                                    <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                        <img src="images/unlike.png" style="width: 25px; height: 25px;"/>
+                                    </button>
+                            </form>
+                            {% else %}
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="like" value="like">
+                                        <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                            <img src="{% static 'images/like.png' %}" style="width: 25px; height: 25px;"/>
+                                        </button>
+                                </form>
+                            {% endif %}
+
+                            {% if post.likes.count == 0 %}
+                                No one liked this post yet
+                            {% elif post.likes.count == 1 %}
+                                {% if request.user in post.likes.all %}
+                                    1 like (You)
+                                {% else %}
+                                    {{post.likes.count}} like
+                                {% endif %}
+                            {% else %}
+                                {{post.likes.count}} likes
+                            {% endif %}
+
+                        </div>
+
+                        <div class="on-right">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment" value="comment">
+                                <input type="text" class="comment-input" name="comment_content" placeholder="Comment">
+                                    <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
+                                        <img src="{% static 'images/comment.png' %}" style="width: 25px; height: 25px;"/>
+                                    </button>
+                            </form>
+                        </div>
+                        
+                          
+
                     </div>
                     
-                {% endfor %}
-                <div class="add-comment-container">
-                    <form method="POST" action="">
-                        {% csrf_token %}
-                        <input type="text" class="form-control" name="comment_content"
-                        placeholder="Add your comment here...">
-                        <br>
-                        <button type="submit" class="btn bg-success">Add</button>
-                    </form>
-<!-- 
-                    <form method="POST" action="">
-                        {% csrf_token %}
-                        <input type="hidden" name="like" value="like">
-                        <button type="submit" name="post_id" value="{{post.id}}" class="btn bg-success">Like</button>
-                    </form> -->
                 </div>
-
-                </div>
-                </p>
             </div>
+
+            <div class="edit-delete-container">
+                {% if request.user == post.host %}
+
+                <a href="{% url 'delete-post' post.id %}">
+                    <img src="{% static 'images/close.png' %}" style="width: 25px; height: 25px;"/>
+                </a>
+
+                <a href="{% url 'edit-post' post.id %}">
+                    <img src="{% static 'images/edit.png' %}" style="width: 25px; height: 25px;"/>
+                </a>
+                
+                {% endif %}
+            </div>
+
         </div>
 
         <div class="sidebar-container">
