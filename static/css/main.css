@@ -294,10 +294,7 @@
 {
     float: right;
 }
-.like-comment-save-container
-{
-    
-}
+
 .like-comment-save-container a.on-right
 {
     float: right;
@@ -341,8 +338,6 @@
     position: relative;
 }
 
-
-
 .main-search-input-item {
     float: left;
     width: 100%;
@@ -350,10 +345,6 @@
     border-right: 1px solid #eee;
     height: 50px;
     position: relative;
-}
-
-.main-search-input-item input:first-child {
-    border-radius: 100%;
 }
 
 .main-search-input-item input {
