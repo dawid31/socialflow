@@ -11,6 +11,7 @@ class Post(models.Model):
     img = models.ImageField(null=True, blank=True, upload_to = "images/")
     host = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     published = models.DateTimeField(auto_now_add=True)
+    test_field = models.CharField(max_length=48, blank=True, null=True)
     
     class Meta():
         ordering = ['-published']
