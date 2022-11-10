@@ -6,10 +6,10 @@ to other users, customize their profile page and follow each other.
 Applcation has built in login, register and password recovery functionality.
 
 <p align="center">
-  <img src="https://imgur.com/VQ5nwcJ" width="80%" height="80%">
+  <img src="https://i.imgur.com/VQ5nwcJ.png" width="80%" height="80%">
 </p>
 <p align="center">
-  <img src="https://imgur.com/QppPSCG" width="80%" height="80%">
+  <img src="https://i.imgur.com/QppPSCG.png" width="80%" height="80%">
 </p>
 
  ## Table of contents
@@ -64,6 +64,7 @@ $ cd ../DjangoBlogApp
 ## Contact
 
 email - dawidkedziersik04@gmail.com
+<br>
 linkedin - www.linkedin.com/in/dawid-kedzierski31
 
 
