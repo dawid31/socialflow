@@ -233,6 +233,9 @@
 
 .top-navbar
 {
+    position: -webkit-sticky;
+	position: sticky;
+	top: 0;
     text-align: center;
     letter-spacing: 1px;
     padding-left: 150px;
@@ -294,6 +297,8 @@
 {
     float: right;
 }
+
+
 
 .like-comment-save-container a.on-right
 {
