@@ -16,6 +16,12 @@ class AccountForm(ModelForm):
         model = Profile
         fields = '__all__'
         exclude = ['user', 'followers', 'following']
+    
+    def __init__(self, *args, **kwargs):
+        super(AccountForm, self).__init__(*args, **kwargs)
+
+        self.fields['biogram'].widget.attrs.update(
+            {'class': 'form-control'})
 
 
 class CustomUserCreationForm(UserCreationForm):
