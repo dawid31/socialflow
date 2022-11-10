@@ -8,9 +8,6 @@ Applcation has built in login, register and password recovery functionality.
 <p align="center">
   <img src="https://i.imgur.com/VQ5nwcJ.png" width="80%" height="80%">
 </p>
-<p align="center">
-  <img src="https://i.imgur.com/QppPSCG.png" width="80%" height="80%">
-</p>
 
  ## Table of contents
 * [Technologies Used](#technologies-used)
