@@ -52,7 +52,7 @@
 
         <div class="posts-container">
 
-            {% for post in posts %}
+            {% for post in paginated_posts %}
             <div class="post-container">
             
                 <div class="avatar-container">
@@ -178,6 +178,25 @@
 
             </div>
             {% endfor %}
+
+            <div class="paginator">
+                {% if paginated_posts.has_previous %}
+                <a href="?page={{ paginated_posts.previous_page_number }}">&laquo; Previous</a>
+            {% endif %}
+
+            {% for post_number in paginated_posts.paginator.page_range %}
+                {% if post_number == paginated_posts.number %}
+                    {{ post_number }}
+                {% else %}
+                    <a href="?page={{ post_number }}">{{ post_number }}</a>
+                {% endif %}
+            {% endfor %}
+                
+            {% if paginated_posts.has_next %}
+                <a href="?page={{ paginated_posts.next_page_number }}">Next &raquo;</a>
+            {% endif %}
+            </div>
+
         </div>
 
     </div>

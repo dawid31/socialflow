@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
@@ -23,6 +24,11 @@ def home(request):
         Q(content__icontains=q) |
         Q(host__username__icontains=q)
     )
+
+    #Setting up paginator (what do we want to paginate and how many objects per page)
+    p = Paginator(Post.objects.all(), 3)
+    page = request.GET.get('page')
+    paginated_posts = p.get_page(page)
     if request.user.is_authenticated:
         followed_people = request.user.profile.following.all()
         followed_posts = Post.objects.filter(host__in=followed_people).all()
@@ -54,6 +60,7 @@ def home(request):
 
     context = {
         'posts': posts,
+        'paginated_posts': paginated_posts,
         'comments': comments,
         'recent_comments': recent_comments,
         'users_and_posts': users_and_posts,

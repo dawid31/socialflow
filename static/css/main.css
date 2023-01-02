@@ -298,7 +298,13 @@
     float: right;
 }
 
+.paginator
+{
+    font-size: larger;
+    text-align: center;
+    letter-spacing: 2px;
 
+}
 
 .like-comment-save-container a.on-right
 {
