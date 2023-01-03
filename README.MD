@@ -60,7 +60,7 @@ $ cd ../DjangoBlogApp
 <!-- CONTACT -->
 ## Contact
 
-email - dawidkedziersik04@gmail.com
+email - dawidkedzierski04@gmail.com
 <br>
 linkedin - www.linkedin.com/in/dawid-kedzierski31
 
