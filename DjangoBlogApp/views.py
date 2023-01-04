@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -220,11 +221,14 @@ def registerUser(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-
             user = authenticate(request, username=user.username, password=request.POST['password1'])
 
             if user is not None:
                 login(request, user)
+                messages.success(request, "Your account was created successfully")
                 return redirect('home')
+        else:
+            messages.error(request, "There was an error during registration")
+
     context = {'form': form}
     return render(request, 'DjangoBlogApp/register.html', context)

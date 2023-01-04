@@ -27,9 +27,9 @@ urlpatterns = [
     auth_views.PasswordResetConfirmView.as_view(template_name='DjangoBlogApp/password_reset_confirm.html'),
     name="password_reset_confirm"),
 
-    path('reset_password_complete/',
+    path('password_reset_complete/',
     auth_views.PasswordResetCompleteView.as_view(template_name='DjangoBlogApp/password_reset_complete.html'),
-    name="password_reset_form"),
+    name="password_reset_complete"),
 
     path('profile/<str:pk>/', views.profile, name="profile"),
     path('followers/<str:pk>/', views.followers, name="followers"),

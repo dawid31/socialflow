@@ -28,7 +28,7 @@ Applcation has built in login, register and password recovery functionality.
   - Create, read, update, delete and posts and comments
   - Liking posts
   - Customizing your own profile by adding avatar, biogram
-  - Following people and 
+  - Following people
   - Personalized activity feed based on people you follow
   - Password recovery using one-time link sent on email provided during registration
 

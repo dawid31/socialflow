@@ -18,7 +18,15 @@
     {% block content %}
     <body class="global">
 
-    
+    <!-- Notify about messages for example an error during registration declared in views.py  -->
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          {{message}}
+        {% endfor %}
+      </ul>
+    {% endif %}
+
     </body>
     {% endblock content %}
 </html>
