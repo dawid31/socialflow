@@ -33,7 +33,7 @@ Applcation has built in login, register and password recovery functionality.
 
 * Other features:
   - Built-in search functionality through whole website content
-  - Most acitve users ranking (based on amount of posts on blog)
+  - Most acitve users ranking (based on amount of posts)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -44,8 +44,8 @@ $ python3 -m venv env
 ```
 - _Clone current repo_ 
 ```
-$ git clone https://github.com/dawid31/DjangoBlogApp.git
-$ cd ../DjangoBlogApp
+$ git clone https://github.com/dawid31/socialflow.git
+$ cd ../socialflow
 ```
 
 - _Next_
