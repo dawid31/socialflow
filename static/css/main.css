@@ -1,12 +1,13 @@
 .global
 {
-    background-color: #1D1D25;
+    background-color: rgb(16,17,19);
     color: #f2f2f2;
+    padding-top: 70px;
 }
 
 .global a
 {
-    color: #0f8430;
+    color: #f2f2f2;
     text-decoration: none;
 }
 
@@ -48,8 +49,9 @@
     margin-top: 5px;
     padding-bottom: 10px;
     margin-bottom: 5px;
-    background: #252B30;
+    background: rgb(26,27,30);
     min-width: 100%;
+    
 }
 
 .edit-delete-container
@@ -83,9 +85,15 @@
     border-radius: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
-    background-color: #2D383A;
+    border-top: ;
+    border: groove;
+    border-color: #373a40;
 }
 
+.logo
+{
+    letter-spacing: 2px;
+}
 .comment-container-right
 {
     margin-top: 15px;
@@ -152,7 +160,7 @@
     border-radius: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
-    background: #252B30;
+    background: rgb(26,27,30);
 }
 
 .sidebar-content
@@ -161,12 +169,13 @@
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 20px;
+    background: rgb(26,27,30);
 }
 
 .sidebar-content-element
 {
-    border: solid;
-    border-color: #3c4a55;
+    border: groove;
+    border-color: #373a40;
     border-radius: 10px;
     padding: 5px;
     margin-top: 10px;
@@ -197,7 +206,7 @@
     margin-left: 5px;
     margin-right: 5px;
     padding: 5px;
-    background: #252B30;
+    background: rgb(26,27,30);
     border-radius: 3px;
 }
 
@@ -209,7 +218,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 30px;
-    background: #3c4a55;
+    background: #373a40;
 }
 .right-sidebar
 {
@@ -230,6 +239,18 @@
     height: fit-content;
 }
 
+.on-left
+{
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    float: left;
+}
+.on-right
+{
+    float: right;
+    margin-right: 20px;
+}
 .right-navbar
 {
     float: right;
@@ -237,17 +258,20 @@
 
 .top-navbar
 {
-    position: -webkit-sticky;
-	position: sticky;
-	top: 0;
-    text-align: center;
-    letter-spacing: 1px;
-    padding-left: 150px;
-    padding-right: 150px;
-    background: #333;
+    display: flex; /* sets display property to flex */
+    justify-content: space-between; /* sets the horizontal spacing between the elements */
+    align-items: center; /* aligns items vertically at the center */
+    height: 60px; /* sets the height of the navbar */
+    padding: 0 100px; /* adds padding to the left and right of the navbar */
+    background: rgb(26,27,30);
     overflow: hidden;
+    background-color: rgb(26,27,30);
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
 
 }
+
 
 .multimedia-container
 {
@@ -267,23 +291,20 @@
 
 .top-navbar a:hover
 {
-    background-color: #252B30;
     text-decoration: none;
-    color: #0f8430;
 }
 
 .above-posts-container
 {
     letter-spacing: 1px;
     display: flex;
-    margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .above-posts-container-right
 {
     margin-left: auto;
-    background: #51777d;
+    background: #373a40;
     border-radius: 10px;
     padding-left: 10px;
     padding-right: 10px;
@@ -310,22 +331,27 @@
 
 }
 
+.like-comment-save-container
+{
+    padding-top: 15px;
+    text-align: center;
+}
+
 .like-comment-save-container a.on-right
 {
     float: right;
 }
-.on-left
-{
-    display: flex;
-    text-align: center;
-    flex-direction: row;
-    float: left;
-}
-.on-right
-{
-    float: right;
-    margin-right: 20px;
-}
+
+.top-navbar-left {
+    padding: 0 335px;
+    display: flex; /* sets display property to flex */
+    align-items: center; /* aligns items vertically at the center */
+  }
+  
+  .top-navbar-right {
+    display: flex; /* sets display property to flex */
+    align-items: center; /* aligns items vertically at the center */
+  }
 
 .comment-input
 {
@@ -426,4 +452,34 @@
     width: 100%;
     border-radius: 6px;
 }
+}
+
+.create-post-container
+{
+    width: 100%;
+    padding: 15px 7px;
+    background: rgb(26,27,30);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.avatar
+{                               
+    margin-left: 5px;
+}
+
+.greeting
+{
+    margin-left: 20px;
+    color: rgb(128,128,128)
+}
+
+.post-details
+{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgb(26,27,30);
+    margin: 0 300px;
 }

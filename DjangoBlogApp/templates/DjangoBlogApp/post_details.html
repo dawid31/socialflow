@@ -1,8 +1,7 @@
 {% include 'DjangoBlogApp/main.html' %}
 {% load static %}
 {% block content %}
-    <div class="home-container">
-        <div class="sidebar-container"></div>
+    <div class="post-details">
 
         <div class="post-container">
             
@@ -17,10 +16,8 @@
                     <a class="on-right" href="{% url 'post-details' post.id%}">See whole discussion</a>
 
                 </p>
-                {{post.content|slice:":200"|linebreaks}}
-                {% if post.content|length > 200 %}
-                    <p><a href="{% url 'post-details' post.id%}">[Read more]</a></p>
-                {% endif %}
+                {{post.content}}
+                
 
                 {% if post.img %}
                 <div class="multimedia-container">
@@ -129,9 +126,5 @@
 
         </div>
 
-        <div class="sidebar-container">
-            {{post.comments.count}} comments
-            {{participants}}
-        </div>
-
+       
 {% endblock content %}

@@ -1,12 +1,12 @@
 
-# DjangoBlogApp
+# socialflow
 Blog application made using Django, HTML, CSS and Bootstrap.
 Visitor can create their own account in order to discuss by uploading posts, commenting
 to other users, customize their profile page and follow each other.
 Applcation has built in login, register and password recovery functionality.
 
 <p align="center">
-  <img src="https://i.imgur.com/VQ5nwcJ.png" width="80%" height="80%">
+  <img src="https://imgur.com/o7o25R3" width="80%" height="80%">
 </p>
 
  ## Table of contents
@@ -23,16 +23,14 @@ Applcation has built in login, register and password recovery functionality.
 
 ## Features
 * User profile
-  - Sign up
-  - Log in
-  - Create, read, update, delete and posts and comments
-  - Liking posts
+  - Sign Up & Log in
+  - Create, read, update, delete your own posts and comments, liking and commenting
   - Customizing your own profile by adding avatar, biogram
-  - Following people
+  - Following people through receiving e-mail notification whenever person that you follow uploads new post
   - Personalized activity feed based on people you follow
   - Password recovery using one-time link sent on email provided during registration
 
-* Other futures:
+* Other features:
   - Built-in search functionality through whole website content
   - Most acitve users ranking (based on amount of posts on blog)
 

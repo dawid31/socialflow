@@ -204,7 +204,6 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, 'Logged in successfully.')
             return redirect('home')
         else:
             messages.error(request, 'An error appeared during your login attempt.')

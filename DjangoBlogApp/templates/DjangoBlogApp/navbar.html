@@ -1,21 +1,26 @@
 {% load static %}
 
-  <div class="top-navbar">
-    <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" style="width: 50px; height: 50px"/></a>
-    <a href="{% url 'home' %}">Home</a>
-    <a href="{% url 'about' %}">About</a>
-    {% if user.is_authenticated %}
-    logged in as {{request.user.username}}
-    <a href="{% url 'logout' %}" class="on-right">Logout</a>
-    <a href="{% url 'profile' request.user.id %}" class="on-right">
-      <img src="{{request.user.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;  border: solid; border-color: rgb(90, 65, 216);""/>
-    </a>
-    {% else %}
-    <a href="{% url 'login' %}" class="on-right">Login</a>
-    <a class="on-right"><img src="images/default.png" class="rounded-circle" style="width: 50px; height: 50px;  border: solid; border-color: rgb(90, 65, 216);""/></a>
-    {% endif %}
+  <nav class="top-navbar">
+    <div class="top-navbar-left">
+      <a class="logo" href="{% url 'home' %}">socialflow</a>
+    </div>
     
-  </div>
+    <div class="top-navbar-right">
+    {% if user.is_authenticated %}
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'logout' %}" class="on-right">Logout</a>
+      <a href="{% url 'profile' request.user.id %}" class="on-right">
+        <img src="{{request.user.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;  border: solid; border-color: rgb(90, 65, 216);""/>
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}" class="on-right">Login</a>
+      <a class="on-right"><img src="images/default.png" class="rounded-circle" style="width: 50px; height: 50px;  border: solid; border-color: rgb(90, 65, 216);""/></a>
+      {% endif %}
+    </div>
+    
+    
+  </nav>
   <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <img src="{% static '/images/logo.png' %}" style="width: 50px; height: 50px;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
