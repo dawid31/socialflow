@@ -28,7 +28,7 @@ SECRET_KEY = config("SECRET_KEY") #this line replaces previous secret key to mak
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['socialflow-production-dcba.up.railway.app']
+ALLOWED_HOSTS = []
 
 
 # Application definition
