@@ -1,6 +1,7 @@
 
 # socialflow
-Blog application made using Django, HTML, CSS and Bootstrap.
+socialflow is webapp where you can connect with people all around the world.
+App created using Django, HTML, CSS and Bootstrap.
 Visitor can create their own account in order to discuss by uploading posts, commenting
 to other users, customize their profile page and follow each other.
 Applcation has built in login, register and password recovery functionality.
