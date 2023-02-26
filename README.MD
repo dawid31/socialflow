@@ -6,7 +6,7 @@ to other users, customize their profile page and follow each other.
 Applcation has built in login, register and password recovery functionality.
 
 <p align="center">
-  <img src="https://imgur.com/o7o25R3" width="80%" height="80%">
+  <img src="https://i.imgur.com/o7o25R3.png" width="80%" height="80%">
 </p>
 
  ## Table of contents
