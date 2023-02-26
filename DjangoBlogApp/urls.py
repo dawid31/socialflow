@@ -37,25 +37,3 @@ urlpatterns = [
     path('register/', views.registerUser, name="register"),
 ]
 
-'''
-built in password reset functionality pattern:
---
-in urls.py:
-
-1)
-    from django.contrib.auth import views as auth_views
-
-
-2)
-    submit ur email ->  auth_views.PasswordResetView.as_view()
-
-    info that email was sent successfully -> auth_views.PasswordResetDoneView.as_view()
-
-    template rendered after you enter link in your email -> auth_views.PasswordResetConfirmView.as_view()
-    (uid64 and token args required in url for safety reasons!)  
-
-    notification about successfully changed password -> auth_views.PasswordResetCompleteView.as_view()
-
-3) add dynamic name for above urls listed in documentation
-https://docs.djangoproject.com/en/3.0/topics/auth/default/#all-authentication-views
-'''
