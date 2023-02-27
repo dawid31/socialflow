@@ -1,5 +1,5 @@
 {% include 'DjangoBlogApp/main.html' %}
-
+{% load static %}
 {% block content %}
 
 <div class="home-container">
@@ -30,7 +30,8 @@
                 {% if user.is_authenticated %}
                 <img src="{{request.user.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
                 {% else %}
-                <img src="images/default.png" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                <img src='{% static "images/default.png" %}' class="rounded-circle" style="width: 75px; height: 75px;"/>
+
                 {% endif %}
             </div>
             <div class="greeting">
@@ -90,11 +91,11 @@
                             <div class="comment-container-right">
 
                                 <a href="{% url 'delete-comment' comment.id %}">
-                                    <img src="images/close.png" style="width: 15px; height: 15px;"/>
+                                    <img src='{% static "images/close.png" %}' style="width: 15px; height: 15px;"/>
                                 </a>
 
                                 <a href="{% url 'edit-comment' comment.id %}">
-                                    <img src="images/edit.png" style="width: 15px; height: 15px;"/>
+                                    <img src='{% static "images/edit.png" %}' style="width: 15px; height: 15px;"/>
                                 </a>
                             </div>
                             {% endif %}
@@ -111,7 +112,7 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="unlike" value="unlike">
                                         <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                            <img src="images/unlike.png" style="width: 25px; height: 25px;"/>
+                                            <img src='{% static "images/unlike.png" %}' style="width: 25px; height: 25px;"/>
                                         </button>
                                 </form>
                                 {% else %}
@@ -119,7 +120,7 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="like" value="like">
                                             <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                                <img src="images/like.png" style="width: 25px; height: 25px;"/>
+                                                <img src='{% static "images/like.png" %}' style="width: 25px; height: 25px;"/>
                                             </button>
                                     </form>
                                 {% endif %}
@@ -144,7 +145,7 @@
                                     <input type="hidden" name="comment" value="comment">
                                     <input type="text" class="comment-input" name="comment_content" placeholder="Comment">
                                         <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                            <img src="images/comment.png" style="width: 25px; height: 25px;"/>
+                                            <img src='{% static "images/comment.png" %}' style="width: 25px; height: 25px;"/>
                                         </button>
                                 </form>
                             </div>
@@ -160,11 +161,11 @@
                     {% if request.user == post.host %}
 
                     <a href="{% url 'delete-post' post.id %}">
-                        <img src="images/close.png" style="width: 25px; height: 25px;"/>
+                        <img src='{% static "images/close.png" %}' style="width: 25px; height: 25px;"/>
                     </a>
 
                     <a href="{% url 'edit-post' post.id %}">
-                        <img src="images/edit.png" style="width: 25px; height: 25px;"/>
+                        <img src='{% static "images/edit.png" %}' style="width: 25px; height: 25px;"/>
                     </a>
                     
                     {% endif %}
