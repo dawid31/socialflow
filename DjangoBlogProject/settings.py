@@ -57,6 +57,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://socialflow-production.up.railway.app/'
+]
+
 ROOT_URLCONF = 'DjangoBlogProject.urls'
 
 TEMPLATES = [
