@@ -53,7 +53,7 @@ class Profile(models.Model):
             nickname = instance.username
             send_mail(
                 'DjangoBlogApp registration complete',
-                'Thanks for using DjangoBlogApp! Your account was created successfully. \n Your nickname is: {nickname}',
+                f'Thanks for using DjangoBlogApp! Your account was created successfully. \n Your nickname is: {nickname}',
                 'dawidkedzierski04@gmail.com',
                 [instance.email],
                 fail_silently=False
