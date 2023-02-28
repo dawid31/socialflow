@@ -28,7 +28,7 @@
         <div class="create-post-container">
             <div class="avatar">
                 {% if user.is_authenticated %}
-                <img src="{{request.user.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                <img src="{% static request.user.profile.avatar.url %}" class="rounded-circle" style="width: 75px; height: 75px;"/>
                 {% else %}
                 <img src='{% static "images/default.png" %}' class="rounded-circle" style="width: 75px; height: 75px;"/>
 
@@ -51,7 +51,7 @@
             <div class="post-container">
             
                 <div class="avatar-container">
-                    <a href="{% url 'profile' post.host.id %}"><img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/></a>
+                    <a href="{% url 'profile' post.host.id %}"><img src="{% static post.host.profile.avatar.url %}" class="rounded-circle" style="width: 75px; height: 75px;"/></a>
                 </div>
                 
                 <div class="content-container">
@@ -68,7 +68,7 @@
 
                     {% if post.img %}
                     <div class="multimedia-container">
-                        <img style="max-width: 400px; max-height: 266px;" src="{{post.img.url}}"/>
+                        <img style="max-width: 400px; max-height: 266px;" src="{% static post.img.url %}"/>
                     </div>
                     {% endif %}
 
@@ -78,7 +78,7 @@
 
                             <div class="comment-container-left">
                                 <div class="comment-user-container">
-                                    <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
+                                    <img src="{% static comment.author.profile.avatar.url %}" class="rounded-circle" style="width: 50px; height: 50px;"/>
                                     <a class="post-date" href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
                                 </div>
     
@@ -212,7 +212,7 @@
                         <div class="sidebar-content-element-post-info">
 
                             <div class="sidebar-content-element-user-avatar">
-                                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 40px; height: 40px; border: solid; border-color: green;"/>
+                                <img src="{% static post.host.profile.avatar.url %}" class="rounded-circle" style="width: 40px; height: 40px; border: solid; border-color: green;"/>
                             </div>
 
                             <div class="sidebar-content-element-rest">

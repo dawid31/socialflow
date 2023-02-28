@@ -1,5 +1,5 @@
 {% include 'DjangoBlogApp/main.html' %}
-
+{% load static %}
 {% block content%}
     <div class="login-register-container">
 
@@ -10,7 +10,7 @@
             <div class="sidebar-content-element">
                 <p>
                     <div class="avatar-container">
-                        <img src="{{followed.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                        <img src="{% static followed.profile.avatar.url %}" class="rounded-circle" style="width: 75px; height: 75px;"/>
                     </div>
                     <a href="{% url 'profile' followed.profile.id %}">{{followed.username}}</a>
                 </p>

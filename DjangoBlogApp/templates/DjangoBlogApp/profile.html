@@ -6,7 +6,7 @@
     <div class="content-section">
         <div class="media">
           <div class="media-body">
-            <img src="{{user.profile.avatar.url}}" class="rounded-circle" style="width: 150px; height: 150px;"/>
+            <img src="{% static user.profile.avatar.url %}" class="rounded-circle" style="width: 150px; height: 150px;"/>
             <h2 class="account-heading">{{user.username}}</h2>
             <p class="text-secondary">{{user.email}}</p>
             <p>
