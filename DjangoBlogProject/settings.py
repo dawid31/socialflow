@@ -34,6 +34,9 @@ ALLOWED_HOSTS = [
     'socialflow-production.up.railway.app',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://socialflow-production.up.railway.app/']
+
+
 # Application definition
 
 INSTALLED_APPS = [
