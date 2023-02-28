@@ -50,7 +50,7 @@ class Profile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
-            nickname = instance.nickname
+            nickname = instance.username
             send_mail(
                 'DjangoBlogApp registration complete',
                 'Thanks for using DjangoBlogApp! Your account was created successfully. \n Your nickname is: {nickname}',

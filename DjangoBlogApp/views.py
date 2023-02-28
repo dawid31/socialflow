@@ -82,6 +82,7 @@ def create_post(request):
         content = content,
         img = img,
         )
+        return redirect('home')
     context = {}
     return render(request, 'DjangoBlogApp/create_post.html', context)
 
