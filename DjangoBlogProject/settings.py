@@ -56,9 +56,8 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = ['https://socialflow-production.up.railway.app', 'https://www.socialflow-production.up.railway.app']
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 
 ROOT_URLCONF = 'DjangoBlogProject.urls'
 
