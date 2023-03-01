@@ -56,8 +56,8 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = ['https://socialflow-production.up.railway.app', 'https://www.socialflow-production.up.railway.app']
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 
 ROOT_URLCONF = 'DjangoBlogProject.urls'
 
@@ -149,3 +149,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'dawidkedzierski04@gmail.com'
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = 'dawidkedzierski04@gmail.com'
