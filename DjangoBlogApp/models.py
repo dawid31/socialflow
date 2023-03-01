@@ -3,12 +3,15 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
+from django.conf import settings
+import os
+
 # Create your models here.
 class Post(models.Model):
     name = models.CharField(max_length=48, blank=True, null=True)
     content = models.TextField(max_length=512)
     likes = models.ManyToManyField(User, blank=True, related_name="blog_posts")
-    img = models.ImageField(null=True, blank=True, upload_to = "images/")
+    img = models.ImageField(null=True, blank=True, upload_to = settings.MEDIA_ROOT)
     host = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     published = models.DateTimeField(auto_now_add=True)
 
@@ -42,7 +45,7 @@ class Post(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     biogram = models.TextField(max_length=512)
-    avatar = models.ImageField(null=True, blank=True, default='default.png')
+    avatar = models.ImageField(null=True, blank=True, default='default.png', upload_to = settings.MEDIA_ROOT)
     followers = models.ManyToManyField(User, blank=True, related_name="followers")
     following = models.ManyToManyField(User, blank=True, related_name="following")
 
