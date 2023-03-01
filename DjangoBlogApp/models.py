@@ -20,23 +20,23 @@ class Post(models.Model):
         return f"{self.name}"
 
 
-@receiver(post_save, sender=Post)
-def send_notification_emails(sender, instance, created, **kwargs):
-    if created:
-        creator = instance.host.username
-        content = instance.content
-        formatted_time = f"{instance.published:%B %d, %Y %H:%M:%S}"
-        link = f'http://127.0.0.1:8000/post-details/{instance.id}/'
+# @receiver(post_save, sender=Post)
+# def send_notification_emails(sender, instance, created, **kwargs):
+#     if created:
+#         creator = instance.host.username
+#         content = instance.content
+#         formatted_time = f"{instance.published:%B %d, %Y %H:%M:%S}"
+#         link = f'http://127.0.0.1:8000/post-details/{instance.id}/'
 
-        followers = instance.host.profile.followers.all() #rethink this
-        for follower in followers:
-            send_mail(
-                f'New post from {creator}',
-                f'{creator} at {formatted_time} wrote: \n "{content} \n Link to whole discussion: {link}"',
-                'dawidkedzierski04@gmail.com',
-                [follower.email],
-                fail_silently=False
-            )
+#         followers = instance.host.profile.followers.all() #rethink this
+#         for follower in followers:
+#             send_mail(
+#                 f'New post from {creator}',
+#                 f'{creator} at {formatted_time} wrote: \n "{content} \n Link to whole discussion: {link}"',
+#                 'dawidkedzierski04@gmail.com',
+#                 [follower.email],
+#                 fail_silently=False
+#             )
 
 
 class Profile(models.Model):
@@ -51,13 +51,13 @@ class Profile(models.Model):
         if created:
             Profile.objects.create(user=instance)
             nickname = instance.username
-            send_mail(
-                'DjangoBlogApp registration complete',
-                f'Thanks for using DjangoBlogApp! Your account was created successfully. \n Your nickname is: {nickname}',
-                'dawidkedzierski04@gmail.com',
-                [instance.email],
-                fail_silently=False
-            )
+            # send_mail(
+            #     'DjangoBlogApp registration complete',
+            #     f'Thanks for using DjangoBlogApp! Your account was created successfully. \n Your nickname is: {nickname}',
+            #     'dawidkedzierski04@gmail.com',
+            #     [instance.email],
+            #     fail_silently=False
+            # )
         
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs): 
