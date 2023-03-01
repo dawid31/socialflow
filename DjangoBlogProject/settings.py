@@ -30,9 +30,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+
 
 # Application definition
 
@@ -57,7 +55,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
+CSRF_TRUSTED_ORIGINS = ['https://socialflow-production.up.railway.app', 'https://www.socialflow-production.up.railway.app']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
 ROOT_URLCONF = 'DjangoBlogProject.urls'
 

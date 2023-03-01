@@ -4,7 +4,7 @@ socialflow is webapp where you can connect with people all around the world.
 App created using Django, HTML, CSS and Bootstrap.
 Visitor can create their own account in order to discuss by uploading posts, commenting
 to other users, customize their profile page and follow each other.
-Applcation has built in login, register and password recovery functionality.
+Application has built in login, register and password recovery functionality.
 
 <p align="center">
   <img src="https://i.imgur.com/o7o25R3.png" width="80%" height="80%">
