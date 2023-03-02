@@ -4,11 +4,10 @@
     <div class="post-details">
 
         <div class="post-container">
-            
             <div class="avatar-container">
-                <img src="{{post.host.profile.avatar.url}}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                <img src="{% static post.host.profile.avatar.url %}" class="rounded-circle" style="width: 75px; height: 75px;"/>
             </div>
-            
+                
             <div class="content-container">
                 <h1>{{post.name}}</h1>
                 <p>
@@ -21,7 +20,7 @@
 
                 {% if post.img %}
                 <div class="multimedia-container">
-                    <img style="max-width: 400px; max-height: 266px;" src="{{post.img.url}}"/>
+                    <img style="max-width: 400px; max-height: 266px;" src="{% static post.img.url %}"/>
                 </div>
                 {% endif %}
 
@@ -31,7 +30,7 @@
 
                         <div class="comment-container-left">
                             <div class="comment-user-container">
-                                <img src="{{comment.author.profile.avatar.url}}" class="rounded-circle" style="width: 50px; height: 50px;"/>
+                                <img src="{% static comment.author.profile.avatar.url %}" class="rounded-circle" style="width: 50px; height: 50px;"/>
                                 <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
                             </div>
 
@@ -65,7 +64,7 @@
                                 {% csrf_token %}
                                 <input type="hidden" name="unlike" value="unlike">
                                     <button class="comment-button" type="submit" name="post_id" value="{{post.id}}" >
-                                        <img src="images/unlike.png" style="width: 25px; height: 25px;"/>
+                                        <img src="{% static 'images/unlike.png' %}" style="width: 25px; height: 25px;"/>
                                     </button>
                             </form>
                             {% else %}
