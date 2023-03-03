@@ -13,7 +13,6 @@
                 <p>
                     <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>  {{post.published|timesince}} ago
                     <a class="on-right" href="{% url 'post-details' post.id%}">See whole discussion</a>
-
                 </p>
                 {{post.content}}
                 
