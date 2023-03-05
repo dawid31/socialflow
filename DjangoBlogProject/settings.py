@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/images/'
+MEDIA_URL = 'images/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -152,11 +153,13 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 # DEFAULT_FROM_EMAIL = 'dawidkedzierski04@gmail.com'
 
 
-# #AWS S3 BUCKET CONFIG (ENVS)
-# DEFAULT_FILE_STORAGE = config("DEFAULT_FILE_STORAGE")
-# STATICFILES_STORAGE = config("STATICFILES_STORAGE")
-# AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
-# AWS_SECRET_ACCESS_KEY =  config("AWS_SECRET_ACCESS_KEY")
-# AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAULT_ACL = None
+#AWS S3 BUCKET CONFIG (ENVS)
+DEFAULT_FILE_STORAGE = config("DEFAULT_FILE_STORAGE")
+STATICFILES_STORAGE = config("STATICFILES_STORAGE")
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY =  config("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+#AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
