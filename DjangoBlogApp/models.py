@@ -45,7 +45,7 @@ class Post(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     biogram = models.TextField(max_length=512)
-    avatar = models.ImageField(null=True, blank=True, default='default.png', upload_to = settings.MEDIA_ROOT)
+    avatar = models.ImageField(null=True, blank=True, default='default.png')
     followers = models.ManyToManyField(User, blank=True, related_name="followers")
     following = models.ManyToManyField(User, blank=True, related_name="following")
 
