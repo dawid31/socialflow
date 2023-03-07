@@ -11,7 +11,7 @@ class Post(models.Model):
     name = models.CharField(max_length=48, blank=True, null=True)
     content = models.TextField(max_length=512)
     likes = models.ManyToManyField(User, blank=True, related_name="blog_posts")
-    img = models.ImageField(null=True, blank=True, upload_to = settings.MEDIA_ROOT)
+    img = models.ImageField(null=True, blank=True)
     host = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     published = models.DateTimeField(auto_now_add=True)
 
