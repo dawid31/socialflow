@@ -19,13 +19,12 @@
                                     </div>
                                     <div class="sidebar-content-element-rest">
                                         <div class="sidebar-content-element-host-info">
-                                            <a href="{% url 'profile' user.profile.id %}">@{{user.username}}    
+                                            <a href="{% url 'profile' user.profile.id %}">@{{user.username}}</a>     
                                         </div>
                                     <div class="sidebar-content-element-post-date">
                                         {{user.profile.biogram|slice:":31"}}
                                         {% if user.profile.biogram|length > 31 %}
                                         ...
-                                        </a> 
                                         {% endif %}
                                     </div>
                                         
