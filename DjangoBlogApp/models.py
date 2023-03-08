@@ -44,7 +44,7 @@ def send_notification_emails(sender, instance, created, **kwargs):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
-    biogram = models.TextField(max_length=512)
+    biogram = models.TextField(max_length=512, blank=True, null=True)
     avatar = models.ImageField(null=True, blank=True, default='default.png')
     followers = models.ManyToManyField(User, blank=True, related_name="followers")
     following = models.ManyToManyField(User, blank=True, related_name="following")

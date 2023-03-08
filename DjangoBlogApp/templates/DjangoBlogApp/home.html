@@ -7,6 +7,27 @@
 
         <div class="sidebar-most-and-recent-container">
             <div class="sidebar-label">
+                Online - tu ilosc osob
+            </div>
+
+            <div class="sidebar-content">
+                {% if request.user.is_authenticated %}
+                    <p>
+                        {{request.user.username}} is online
+                    </p>
+                {% endif %}
+                {% for user in users%}
+                    {% if user.is_authenticated %}
+                        <p>
+                            {{user.username}} is online
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            </div> 
+        </div>
+
+        <div class="sidebar-most-and-recent-container">
+            <div class="sidebar-label">
                 MOST ACTIVE USERS
             </div>
 
@@ -28,11 +49,9 @@
         <div class="create-post-container">
             <div class="avatar">
                 {% if user.is_authenticated %}
-
                 <img src="{{ request.user.profile.avatar.url }}" class="rounded-circle" style="width: 75px; height: 75px;"/>
                 {% else %}
                 <img src='{% static "images/default.png" %}' class="rounded-circle" style="width: 75px; height: 75px;"/>
-
                 {% endif %}
             </div>
             <div class="greeting">
@@ -213,7 +232,7 @@
                         <div class="sidebar-content-element-post-info">
 
                             <div class="sidebar-content-element-user-avatar">
-                                <img src="{{ post.host.profile.avatar.url }}" class="rounded-circle" style="width: 40px; height: 40px; border: solid; border-color: green;"/>
+                                <a href="{% url 'profile' post.host.id %}"><img src="{{ post.host.profile.avatar.url }}" class="rounded-circle" style="width: 40px; height: 40px; border: solid; border-color: green;"/></a>
                             </div>
 
                             <div class="sidebar-content-element-rest">

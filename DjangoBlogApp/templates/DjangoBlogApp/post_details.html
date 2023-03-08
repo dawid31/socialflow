@@ -5,7 +5,7 @@
 
         <div class="post-container">
             <div class="avatar-container">
-                <img src="{% static post.host.profile.avatar.url %}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                <a href="{% url 'profile' post.host.id %}"><img src="{{ post.host.profile.avatar.url }}" class="rounded-circle" style="width: 75px; height: 75px;"/></a>
             </div>
                 
             <div class="content-container">
@@ -19,7 +19,7 @@
 
                 {% if post.img %}
                 <div class="multimedia-container">
-                    <img style="max-width: 400px; max-height: 266px;" src="{% static post.img.url %}"/>
+                    <img style="max-width: 400px; max-height: 266px;" src="{{ post.img.url }}"/>
                 </div>
                 {% endif %}
 
@@ -29,8 +29,8 @@
 
                         <div class="comment-container-left">
                             <div class="comment-user-container">
-                                <img src="{% static comment.author.profile.avatar.url %}" class="rounded-circle" style="width: 50px; height: 50px;"/>
-                                <a href="{% url 'profile' comment.author.id %}">@{{comment.author}}</a> • {{comment.published|timesince}} ago
+                                <a href="{% url 'profile' comment.author.id %}"><img src="{{ comment.author.profile.avatar.url }}" class="rounded-circle" style="width: 50px; height: 50px;"/>
+                                @{{comment.author}}</a> • {{comment.published|timesince}} ago
                             </div>
 
                             <div class="comment-content-container">

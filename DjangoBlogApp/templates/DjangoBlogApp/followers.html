@@ -6,12 +6,13 @@
     {% for follower in followers %}
 
     <div class="sidebar-content-element">
-
         <p>
-            <div class="avatar-container">
-                <img src="{% static follower.profile.avatar.url %}" class="rounded-circle" style="width: 75px; height: 75px;"/>
-            </div>
-            <a href="{% url 'profile' follower.profile.id %}">{{follower.username}}</a>
+            <a href="{% url 'profile' follower.profile.id %}">
+                <div class="avatar-container">
+                    <img src="{{ follower.profile.avatar.url }}" class="rounded-circle" style="width: 75px; height: 75px;"/>
+                </div>
+                {{follower.username}}
+            </a>
         </p>
 
     </div>
