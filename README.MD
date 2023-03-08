@@ -18,6 +18,7 @@ Application has built in login, register and password recovery functionality.
 ## Technologies Used
 * Python 3.9.5
 * Django 4.0.6
+* AWS S3
 * Bootstrap v5.2.2
 * HTML5
 * CSS3
