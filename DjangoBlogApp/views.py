@@ -9,16 +9,27 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.contrib.sessions.models import Session
+from django.utils import timezone
 
 # Create your views here.
 def home(request):
     users = User.objects.all()
+    active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    logged_in_users = []
+    for session in active_sessions:
+        session_data = session.get_decoded()
+        user_id = session_data.get('_auth_user_id')
+        if user_id is not None:
+            logged_in_users.append(User.objects.get(pk=user_id))
     users_and_posts = {}
     for user in users:
         if Post.objects.filter(host=user):
             user_posts = Post.objects.filter(host=user).count()
             users_and_posts[Post.objects.filter(host=user).first().host] = user_posts
-    
+        
+    #sort users_and_posts by descending value (in result on page they are displayed in asceding order)
+    users_and_posts = dict(sorted(users_and_posts.items(), key=lambda item: item[1], reverse=True))
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     posts = Post.objects.filter(
         Q(name__icontains=q) |
@@ -65,6 +76,8 @@ def home(request):
         'comments': comments,
         'recent_comments': recent_comments,
         'users_and_posts': users_and_posts,
+        'logged_in_users': list(dict.fromkeys(logged_in_users)),
+        'logged_in_user_count': len(list(dict.fromkeys(logged_in_users))),
         'followed_posts': followed_posts,
     }
 
