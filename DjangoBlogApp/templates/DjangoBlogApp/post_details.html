@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <div class="post-details">
-        <a href="{% url 'home' %}" class="go-back"><img src='{% static "images/go_back.png" %}' style="width: 20px; height: 20px; text-align: center;"/></a>
+        <a href="{% url 'home' %}" class="go-back"><img src='{% static "images/go_back.png" %}' style="width: 20px; height: 20px;"/></a>
         <div class="post-container">
             <div class="avatar-container">
                 <a href="{% url 'profile' post.host.id %}"><img src="{{ post.host.profile.avatar.url }}" class="rounded-circle" style="width: 75px; height: 75px;"/></a>

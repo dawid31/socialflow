@@ -329,7 +329,16 @@
     letter-spacing: 2px;
 
 }
-
+.go-back
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
 .like-comment-save-container
 {
     padding-top: 15px;
