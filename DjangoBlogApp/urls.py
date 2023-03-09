@@ -14,6 +14,8 @@ urlpatterns = [
     path('edit-comment/<str:pk>/', views.edit_comment, name="edit-comment"),
     path('login/', views.loginUser, name="login"),
     path('logout/', views.logoutUser, name="logout"),
+    path('leaderboard-info/', views.leaderboard_info, name="leaderboard-info"),
+
 
     path('reset_password/',
     auth_views.PasswordResetView.as_view(template_name='DjangoBlogApp/password_reset.html'),

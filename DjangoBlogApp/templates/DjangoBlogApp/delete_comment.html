@@ -1,7 +1,8 @@
 {% include 'DjangoBlogApp/main.html' %}
-
+{% load static %}
 {% block content %}
     <div class="login-register-container">
+        <a href="{% url 'home' %}" class="go-back"><img src='{% static "images/go_back.png" %}' style="width: 20px; height: 20px; text-align: center;"/></a>
         <p>Are you sure you want to delete comment:  {{comment.content}}</p>
         <form method="POST">
             {% csrf_token %}

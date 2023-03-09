@@ -229,6 +229,9 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
+def leaderboard_info(request):
+    context = {}
+    return render (request, 'DjangoBlogApp/leaderboard_info.html')
 
 def registerUser(request):
     form = CustomUserCreationForm()

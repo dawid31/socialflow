@@ -2,7 +2,7 @@
 {% load static %}
 {% block content%}
     <div class="login-register-container">
-
+        <a href="{% url 'home' %}" class="go-back"><img src='{% static "images/go_back.png" %}' style="width: 20px; height: 20px; text-align: center;"/></a>
         <h3>Following:</h3>
 
         {% for followed in following %}

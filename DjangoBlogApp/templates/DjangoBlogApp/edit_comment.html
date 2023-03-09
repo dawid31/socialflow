@@ -1,5 +1,5 @@
 {% include 'DjangoBlogApp/main.html' %}
-
+{% load static %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    <a href="{% url 'home' %}" class="go-back"><img src='{% static "images/go_back.png" %}' style="width: 20px; height: 20px; text-align: center;"/></a>
     <h1 class="text-success text-center">
         socialflow
     </h1>

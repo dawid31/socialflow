@@ -22,10 +22,15 @@
                                             <a href="{% url 'profile' user.profile.id %}">@{{user.username}}</a>     
                                         </div>
                                     <div class="sidebar-content-element-post-date">
-                                        {{user.profile.biogram|slice:":31"}}
-                                        {% if user.profile.biogram|length > 31 %}
-                                        ...
+                                        {% if user.profile.biogram %}
+                                            {{user.profile.biogram|slice:":31"}}
+                                            {% if user.profile.biogram|length > 31 %}
+                                                ...
+                                            {% endif %}
+                                        {% else %}
+                                          
                                         {% endif %}
+
                                     </div>
                                         
                                     </div>   
@@ -37,7 +42,8 @@
 
         <div class="sidebar-most-and-recent-container">
             <div class="sidebar-label">
-                Most active users
+                Leaderboard 
+                <a href="{% url 'leaderboard-info' %}"><img src='{% static "images/info.png" %}' style="width: 20px; height: 20px; text-align: center;"/></a>
             </div>
 
             <div class="sidebar-content">

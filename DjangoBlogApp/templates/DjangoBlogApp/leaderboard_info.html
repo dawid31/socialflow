@@ -1,0 +1,21 @@
+{% include 'DjangoBlogApp/main.html' %}
+{% load static %}
+{% block content %}
+<div class="login-register-container">
+    <a href="{% url 'home' %}" class="go-back"><img src='{% static "images/go_back.png" %}' style="width: 20px; height: 20px; text-align: center;"/></a>
+
+    <ul>
+            How does leaderboard work?
+            The leaderboard ranking is based on the total number of points earned by the user.
+            <hr>
+            How to earn points?
+            <hr>
+            2 points per each uploaded post <br>
+            3 points per each like on your post <br>
+            4 points for every new follower <br>
+            <hr>
+            *Self post likes are not counted!   
+    </ul>
+</div>
+
+{% endblock content %}
