@@ -16,6 +16,18 @@
         
       </div>
       {% endfor %}
+      {% if form.errors %}
+        <div class="alert alert-danger">
+            {% for field, errors in form.errors.items %}
+                <p><strong>{{ field }}:</strong></p>
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+    {% endif %}
       <div class="d-flex justify-content-center">
         <button type="submit"
           class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>

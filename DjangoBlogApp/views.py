@@ -11,6 +11,8 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.sessions.models import Session
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def home(request):
@@ -47,26 +49,9 @@ def home(request):
     else:
         followed_posts = None
 
-    if request.method == "POST":
-
-        if "like" in request.POST:
-            post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
-            post_to_like.likes.add(request.user)
-
-        if "unlike" in request.POST:
-            post_to_unlike = get_object_or_404(Post, id=request.POST.get('post_id'))
-            post_to_unlike.likes.remove(request.user)
-
-        if "comment" in request.POST:
-            post_to_comment = get_object_or_404(Post, id=request.POST.get('post_id'))
-            content = request.POST.get('comment_content')
-            Comment.objects.create(
-                post = post_to_comment,
-                author = request.user,
-                content = content
-            )
-            
-            
+    
+                
+                
     recent_comments = Comment.objects.all().order_by('-published')[:5]
     comments = Comment.objects.all()
 
@@ -80,6 +65,29 @@ def home(request):
         'logged_in_user_count': len(list(dict.fromkeys(logged_in_users))),
         'followed_posts': followed_posts,
     }
+
+    if request.method == "POST":
+        @login_required
+        def handle_post(request):
+            if "like" in request.POST:
+                post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
+                post_to_like.likes.add(request.user)
+
+            if "unlike" in request.POST:
+                post_to_unlike = get_object_or_404(Post, id=request.POST.get('post_id'))
+                post_to_unlike.likes.remove(request.user)
+
+            if "comment" in request.POST:
+                post_to_comment = get_object_or_404(Post, id=request.POST.get('post_id'))
+                content = request.POST.get('comment_content')
+                Comment.objects.create(
+                    post = post_to_comment,
+                    author = request.user,
+                    content = content
+                )
+            return render(request, 'DjangoBlogApp/home.html', context)
+
+        return handle_post(request)
 
     return render(request, 'DjangoBlogApp/home.html', context)
 
@@ -99,7 +107,7 @@ def create_post(request):
     context = {}
     return render(request, 'DjangoBlogApp/create_post.html', context)
 
-
+@login_required
 def post_details(request, pk):
     post = Post.objects.get(id=pk)
     if request.method == "POST":
@@ -166,7 +174,7 @@ def delete_comment(request, pk):
     context = {'comment': comment}
     return render(request, 'DjangoBlogApp/delete_comment.html', context)
 
-
+@login_required
 def profile(request, pk):
     user = User.objects.get(id=pk)
     user_profile = request.user.profile
@@ -210,6 +218,7 @@ def about(request):
     
 
 def loginUser(request):
+    next_page = request.GET.get('next')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -246,8 +255,6 @@ def registerUser(request):
                 login(request, user)
                 messages.success(request, "Your account was created successfully")
                 return redirect('home')
-        else:
-            messages.error(request, "There was an error during registration")
 
     context = {'form': form}
     return render(request, 'DjangoBlogApp/register.html', context)
