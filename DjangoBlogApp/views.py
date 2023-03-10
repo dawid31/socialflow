@@ -122,6 +122,10 @@ def post_details(request, pk):
         if "like" in request.POST:
             post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
             post_to_like.likes.add(request.user)
+        
+        if "unlike" in request.POST:
+                post_to_unlike = get_object_or_404(Post, id=request.POST.get('post_id'))
+                post_to_unlike.likes.remove(request.user)
             
     context = {'post': post}
     return render(request, 'DjangoBlogApp/post_details.html', context)
