@@ -47,8 +47,8 @@
             </div>
 
             <div class="sidebar-content">
-                {% for user, posts in users_and_posts.items %}
-                    <p>{{user.username}}: {{posts}} posts</p>
+                {% for user, points in user_points.items %}
+                    <p>{{user.username}}: {{points}} points</p>
                 {% endfor %}
             </div> 
         </div>

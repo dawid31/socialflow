@@ -15,7 +15,7 @@ class AccountForm(ModelForm):
     class Meta():
         model = Profile
         fields = '__all__'
-        exclude = ['user', 'followers', 'following']
+        exclude = ['user', 'followers', 'following', 'points']
     
     def __init__(self, *args, **kwargs):
         super(AccountForm, self).__init__(*args, **kwargs)

@@ -24,14 +24,16 @@ def home(request):
         user_id = session_data.get('_auth_user_id')
         if user_id is not None:
             logged_in_users.append(User.objects.get(pk=user_id))
-    users_and_posts = {}
-    for user in users:
-        if Post.objects.filter(host=user):
-            user_posts = Post.objects.filter(host=user).count()
-            users_and_posts[Post.objects.filter(host=user).first().host] = user_posts
-        
+
+    profiles = Profile.objects.all()
+    user_points = {}
+    for profile in profiles:
+        user = profile.user
+        points = profile.points
+        user_points[user] = points
+
     #sort users_and_posts by descending value (in result on page they are displayed in asceding order)
-    users_and_posts = dict(sorted(users_and_posts.items(), key=lambda item: item[1], reverse=True))
+    user_points = dict(sorted(user_points.items(), key=lambda item: item[1], reverse=True))
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     posts = Post.objects.filter(
         Q(name__icontains=q) |
@@ -60,7 +62,7 @@ def home(request):
         'paginated_posts': paginated_posts,
         'comments': comments,
         'recent_comments': recent_comments,
-        'users_and_posts': users_and_posts,
+        'user_points': user_points,
         'logged_in_users': list(dict.fromkeys(logged_in_users)),
         'logged_in_user_count': len(list(dict.fromkeys(logged_in_users))),
         'followed_posts': followed_posts,
@@ -69,13 +71,18 @@ def home(request):
     if request.method == "POST":
         @login_required
         def handle_post(request):
+
             if "like" in request.POST:
                 post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
                 post_to_like.likes.add(request.user)
+                post_to_like.host.profile.points += 3
+                post_to_like.host.profile.save()
 
             if "unlike" in request.POST:
                 post_to_unlike = get_object_or_404(Post, id=request.POST.get('post_id'))
                 post_to_unlike.likes.remove(request.user)
+                post_to_unlike.host.profile.points -= 3
+                post_to_unlike.host.profile.save()
 
             if "comment" in request.POST:
                 post_to_comment = get_object_or_404(Post, id=request.POST.get('post_id'))
@@ -85,6 +92,10 @@ def home(request):
                     author = request.user,
                     content = content
                 )
+                post_to_comment.host.profile.points += 5
+                post_to_comment.host.profile.save()
+
+
             return render(request, 'DjangoBlogApp/home.html', context)
 
         return handle_post(request)
@@ -110,23 +121,34 @@ def create_post(request):
 @login_required
 def post_details(request, pk):
     post = Post.objects.get(id=pk)
+
     if request.method == "POST":
-
-        if "comment_content" in request.POST:
-            Comment.objects.create(
-                author = request.user,
-                post = post,
-                content = request.POST.get('comment_content'),
-            )
-
+        if "comment" in request.POST:
+                post_to_comment = get_object_or_404(Post, id=request.POST.get('post_id'))
+                content = request.POST.get('comment_content')
+                Comment.objects.create(
+                    post = post_to_comment,
+                    author = request.user,
+                    content = content
+                )
+                post_to_comment.host.profile.points += 5
+                post_to_comment.host.profile.save()
+        
         if "like" in request.POST:
             post_to_like = get_object_or_404(Post, id=request.POST.get('post_id'))
             post_to_like.likes.add(request.user)
-        
+
+            post_to_like.host.profile.points += 3
+            post_to_like.host.profile.save()
+
         if "unlike" in request.POST:
-                post_to_unlike = get_object_or_404(Post, id=request.POST.get('post_id'))
-                post_to_unlike.likes.remove(request.user)
-            
+            post_to_unlike = get_object_or_404(Post, id=request.POST.get('post_id'))
+            post_to_unlike.likes.remove(request.user)
+
+            post_to_unlike.host.profile.points -= 3
+            post_to_unlike.host.profile.save()
+
+
     context = {'post': post}
     return render(request, 'DjangoBlogApp/post_details.html', context)
 
@@ -149,6 +171,8 @@ def delete_post(request, pk):
 
     if request.method == "POST":
         post.delete()
+        post.host.profile.points -= 5
+        post.host.profile.save()
         return redirect('home')
 
     context = {'post': post}
@@ -173,6 +197,8 @@ def delete_comment(request, pk):
 
     if request.method == "POST":
         comment.delete()
+        comment.post.host.profile.points -= 5
+        comment.post.host.profile.save()
         return redirect('home')
 
     context = {'comment': comment}
@@ -193,10 +219,15 @@ def profile(request, pk):
         if "follow" in request.POST:
             user.profile.followers.add(request.user)
             request.user.profile.following.add(user)
+            user.profile.points += 8
+            user.profile.save()
         
         if "unfollow" in request.POST:
             user.profile.followers.remove(request.user)
             request.user.profile.following.remove(user)
+            user.profile.points -= 8
+            user.profile.save()
+
 
     context = {'user': user, 'form': form}
     return render(request, 'DjangoBlogApp/profile.html', context)

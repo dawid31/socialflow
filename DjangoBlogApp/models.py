@@ -48,6 +48,7 @@ class Profile(models.Model):
     avatar = models.ImageField(null=True, blank=True, default='default.png')
     followers = models.ManyToManyField(User, blank=True, related_name="followers")
     following = models.ManyToManyField(User, blank=True, related_name="following")
+    points = models.IntegerField(default=0)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
