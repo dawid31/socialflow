@@ -1,3 +1,6 @@
+<div id="top"></div>
+Live Project Link: https://socialflow-production-5311.up.railway.app/
+
 
 # socialflow
 socialflow is webapp where you can connect with people all around the world.
@@ -7,7 +10,7 @@ to other users, customize their profile page and follow each other.
 Application has built in login, register and password recovery functionality.
 
 <p align="center">
-  <img src="https://i.imgur.com/o7o25R3.png" width="80%" height="80%">
+  <img src="https://i.imgur.com/cjJieGH.png" width="80%" height="80%">
 </p>
 
  ## Table of contents
@@ -34,7 +37,7 @@ Application has built in login, register and password recovery functionality.
 
 * Other features:
   - Built-in search functionality through whole website content
-  - Most acitve users ranking (based on amount of posts)
+  - Most acitve users ranking (based on users activity on app)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -47,6 +50,7 @@ $ python3 -m venv env
 ```
 $ git clone https://github.com/dawid31/socialflow.git
 $ cd ../socialflow
+$ pip install requirements.txt
 ```
 
 - _Next_
