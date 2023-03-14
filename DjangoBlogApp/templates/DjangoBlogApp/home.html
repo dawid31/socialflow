@@ -48,9 +48,16 @@
 
             <div class="sidebar-content">
                 {% for user, points in user_points.items %}
+                    {% if forloop.counter <= 3 %}
+                    <p> {{ forloop.counter }} {{user.username}}: {{points}} points</p>
+                    {% else %}
                     <p>{{user.username}}: {{points}} points</p>
+                    {% endif %}
                 {% endfor %}
             </div> 
+            <div class="sidebar-label">
+                <a href="{% url 'leaderboard' %}">View all</a>
+            </div>
         </div>
 
        
@@ -92,7 +99,7 @@
                 <div class="content-container">
                     <h1>{{post.name}}</h1>
                     <p>
-                        <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a>  {{post.published|timesince}} ago
+                        <a href="{% url 'profile' post.host.id %}">@{{post.host}}</a> • {{post.published|timesince}} ago
                         <a class="on-right" href="{% url 'post-details' post.id%}">See whole discussion</a>
 
                     </p>
@@ -103,7 +110,7 @@
 
                     {% if post.img %}
                     <div class="multimedia-container">
-                        <img style="max-width: 400px; max-height: 266px;" src="{{ post.img.url }}"/>
+                        <img style="max-width: 500px; max-height: 333px;" src="{{ post.img.url }}"/>
                     </div>
                     {% endif %}
 
@@ -259,7 +266,7 @@
                                 </div>
         
                                 <div class="sidebar-content-element-post-date">
-                                    {{post.published|timesince}} ago
+                                    {{post.published|timesince}}  ago
                                 </div>
                                 
                             </div>

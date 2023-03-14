@@ -34,6 +34,8 @@ def home(request):
 
     #sort users_and_posts by descending value (in result on page they are displayed in asceding order)
     user_points = dict(sorted(user_points.items(), key=lambda item: item[1], reverse=True))
+
+
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     posts = Post.objects.filter(
         Q(name__icontains=q) |
@@ -276,6 +278,20 @@ def logoutUser(request):
 def leaderboard_info(request):
     context = {}
     return render (request, 'DjangoBlogApp/leaderboard_info.html')
+
+def leaderboard(request):
+    profiles = Profile.objects.all()
+    user_points = {}
+    for profile in profiles:
+        user = profile.user
+        points = profile.points
+        user_points[user] = points
+
+    #sort users_and_posts by descending value (in result on page they are displayed in asceding order)
+    user_points = dict(sorted(user_points.items(), key=lambda item: item[1], reverse=True))
+
+    context = {'user_points': user_points}
+    return render (request, 'DjangoBlogApp/leaderboard.html', context)
 
 def registerUser(request):
     form = CustomUserCreationForm()

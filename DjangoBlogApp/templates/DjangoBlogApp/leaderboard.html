@@ -1,0 +1,22 @@
+{% include 'DjangoBlogApp/main.html' %}
+{% load static %}
+{% block content %}
+<div class="login-register-container">
+    <div class="sidebar-label">
+        Leaderboard 
+        <a href="{% url 'leaderboard-info' %}"><img src='{% static "images/info.png" %}' style="width: 20px; height: 20px; text-align: center;"/></a>
+    </div>
+
+    <div class="sidebar-content">
+        {% for user, points in user_points.items %}
+            {% if forloop.counter <= 3 %}
+            <p> {{ forloop.counter }} {{user.username}}: {{points}} points</p>
+            {% else %}
+            <p>{{user.username}}: {{points}} points</p>
+            {% endif %}
+        {% endfor %}
+    </div> 
+    
+</div>
+
+{% endblock content %}

@@ -342,7 +342,6 @@
 .like-comment-save-container
 {
     padding-top: 15px;
-    text-align: center;
 }
 
 .like-comment-save-container a.on-right
@@ -386,7 +385,10 @@
     width: 100%;
     position: relative;
 }
-
+.post-date
+{
+    color: rgb(128,128,128)
+}
 .main-search-input-item {
     float: left;
     width: 100%;
