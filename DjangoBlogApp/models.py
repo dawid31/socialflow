@@ -56,8 +56,8 @@ class Profile(models.Model):
             Profile.objects.create(user=instance)
             nickname = instance.username
             send_mail(
-                'DjangoBlogApp registration complete',
-                f'Thanks for using DjangoBlogApp! Your account was created successfully. \n Your nickname is: {nickname}',
+                'Socialflow registration complete',
+                f'Thanks for using socialflow! Your account was created successfully. \n Your nickname is: {nickname}',
                 'dawidkedzierski04@gmail.com',
                 [instance.email],
                 fail_silently=False
