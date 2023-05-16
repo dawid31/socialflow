@@ -41,7 +41,7 @@ Application has built in login, register and password recovery functionality.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Setup
+<!-- ## Setup
 - _To run this project, you need to install [Django](https://docs.djangoproject.com/en/4.0/intro/) then create and active virtual environment_
 ```
 $ python3 -m venv env
@@ -59,7 +59,7 @@ $ pip install requirements.txt
    ```
    python3 manage.py runserver
    ```
-
+ -->
 
 <!-- CONTACT -->
 ## Contact

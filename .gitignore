@@ -1,2 +1,5 @@
 .env
-staticfiles/
+staticfiles/admin/**
+db.sqlite3
+DjangoBlogApp/__pycache__
+DjangoBlogApp/migrations
